@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/navigation_home"
+        android:title="@string/applicants_fragment_title"
+        android:icon="@drawable/ic_highlight"/>
+
+    <item android:id="@+id/bnv_item_recommendations"
+        android:title="@string/recommendations_fragment_title"
+        android:icon="@drawable/ic_layers"/>
+
+    <item android:id="@+id/navigation_advices"
+        android:title="نصائح"
+        android:icon="@drawable/ic_note"/>
+
+    <item android:id="@+id/navigation_profile"
+        android:title="@string/profile_fragment_title"
+        android:icon="@drawable/ic_person"/>
+
+</menu>

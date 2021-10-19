@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1057254272729",
+    "firebase_url": "https://headsinhalal-default-rtdb.firebaseio.com",
+    "project_id": "headsinhalal",
+    "storage_bucket": "headsinhalal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057254272729:android:a9b060d2c9d95f129918c8",
+        "android_client_info": {
+          "package_name": "com.ahmedfathy.articles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057254272729-pvr4anc3jiteg23j6evsrqu0ndgedcvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFgrDpsIKjrcLD9Z_HRxAOc6y0bmGV-3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057254272729-pvr4anc3jiteg23j6evsrqu0ndgedcvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057254272729:android:19263c139c8c74549918c8",
+        "android_client_info": {
+          "package_name": "com.muslims.firebasemvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057254272729-pvr4anc3jiteg23j6evsrqu0ndgedcvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFgrDpsIKjrcLD9Z_HRxAOc6y0bmGV-3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057254272729-pvr4anc3jiteg23j6evsrqu0ndgedcvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

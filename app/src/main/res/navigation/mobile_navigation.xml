@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.muslims.firebasemvvm.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_advices"
+        android:name="com.muslims.firebasemvvm.ui.advices.AdvicesFragment"
+        android:label="@string/title_advice"
+        tools:layout="@layout/fragment_advices" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.muslims.firebasemvvm.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.muslims.firebasemvvm.ui.details.DetailsFragment"
+        android:label="details_fragment"
+        tools:layout="@layout/details_fragment" >
+        <argument
+            android:name="user"
+            app:argType="com.muslims.firebasemvvm.models.User" />
+    </fragment>
+</navigation>

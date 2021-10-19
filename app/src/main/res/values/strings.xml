@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">لِّتَسْكُنُوٓاْ</string>
+
+    <string name="applicants_fragment_title">الإستمارات</string>
+    <string name="recommendations_fragment_title">الإقتراحات</string>
+    <string name="display_applicant">عرض الإستمارة</string>
+    <string name="advices_fragment_title">\"فمن اتبع هداي فلا يضل ولا يشقى\"</string>
+
+
+    <string name="accountPhone_signin_title">إنشاء حساب</string>
+    <string name="accountPhone_signin_body">من فضلك أدخل رقم هاتفك لتسجيل الدخول للتواصل أو لكتابة إستمارة</string>
+    <string name="accountPhone_login">تسجيل الدخول</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+
+
+    <string name="accountCode_signin_title">التحقق من الرقم</string>
+    <string name="accountCode_signin_body">من فضلك أدخل الرمز الذي تم إرساله إلى 01147399365</string>
+    <string name="accountCode_login">متابعة</string>
+    <string name="fill_applicant_title">اكتب إستمارتك</string>
+
+
+    <string name="app_signature">🅛🅔🅣🅐🅢🅚🅞🅝🅞‌‌</string>
+    <string name="male">رجل</string>
+    <string name="female">امرأة</string>
+    <string name="welcome">السلام عليكم ورحمة الله وبركاته</string>
+    <string name="welcome_body">أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.</string>
+    <string name="nationality_question">ما هي جنسيتك؟</string>
+    <string name="choose_answer">---قم بالإختيار من هنا---</string>
+    <string name="age_question">كم عمرك؟</string>
+    <string name="age_answer">اكتب عمرك هنا....</string>
+    <string name="address_question">أين تسكنين في الوقت الحاضر؟</string>
+    <string name="shape_question">المواصفات العامة</string>
+    <string name="height_answer">الطول</string>
+    <string name="weight_answer">الوزن</string>
+    <string name="color_answer">اللون</string>
+    <string name="profile_fragment_title">حسابي</string>
+
+
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_advice">Advices</string>
+    <string name="title_profile">Profile</string>
+</resources>
