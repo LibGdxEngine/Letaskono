@@ -38,4 +38,9 @@
             android:name="user"
             app:argType="com.muslims.firebasemvvm.models.User" />
     </fragment>
+    <fragment
+        android:id="@+id/savedApplicationsFragment"
+        android:name="com.muslims.firebasemvvm.ui.saved_applications.SavedApplicationsFragment"
+        android:label="fragment_saved_applications"
+        tools:layout="@layout/fragment_saved_applications" />
 </navigation>

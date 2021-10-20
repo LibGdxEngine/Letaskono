@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -17,20 +15,33 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentHomeBinding
 import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.utils.ItemAnimation
+
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
+    lateinit var usersRvAdapter: UsersRvAdapter
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var observer: Observer<List<User>>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        usersRvAdapter = UsersRvAdapter(listOf(), UsersRvAdapter.Listener { user ->
+            onUserRvItemClicked(user)
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -38,30 +49,25 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val usersRvAdapter =
-            UsersRvAdapter(listOf(), UsersRvAdapter.Listener { user ->
-                onUserRvItemClicked(user)
-            })
-
         binding.usersRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = usersRvAdapter
         }
 
-        homeViewModel.users.observe(viewLifecycleOwner, Observer { usersList ->
+        observer = Observer<List<User>> { usersList ->
             usersRvAdapter.users = usersList
             usersRvAdapter.notifyDataSetChanged()
-        })
+        }
+
+        homeViewModel.users.observe(viewLifecycleOwner , observer)
 
         homeViewModel.status.observe(viewLifecycleOwner, Observer {status ->
             when(status){
                 FireStoreStatus.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    binding.usersRecyclerView.visibility = View.INVISIBLE
                 }
                 FireStoreStatus.DONE -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.usersRecyclerView.visibility = View.VISIBLE
                 }
                 FireStoreStatus.ERROR -> {
 
@@ -84,7 +90,6 @@ class HomeFragment : Fragment() {
             }
         )
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

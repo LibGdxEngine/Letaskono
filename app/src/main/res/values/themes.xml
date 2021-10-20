@@ -12,6 +12,7 @@
         <item name="colorOnSecondary">@color/md_white_1000</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
+        <item name="android:windowAnimationStyle">@id/fade</item>
         <!-- Customize your theme here. -->
 <!--        <item name="android:statusBarColor">@color/colorPrimary</item>-->
 <!--        <item name="android:windowNoTitle">true</item>-->

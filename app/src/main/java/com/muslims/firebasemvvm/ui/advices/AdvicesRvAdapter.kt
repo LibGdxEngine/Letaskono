@@ -17,11 +17,6 @@ class AdvicesRvAdapter(var advicesList:List<Advice>, val listener:Listener): Rec
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = advicesList.get(position)
 
-        holder.binding.richLinkView.setLink(currentItem.url, object : ViewListener {
-            override fun onSuccess(status: Boolean) {}
-            override fun onError(e: Exception) {}
-        })
-
         holder.itemView.setOnClickListener{
             listener.onClick(currentItem)
         }

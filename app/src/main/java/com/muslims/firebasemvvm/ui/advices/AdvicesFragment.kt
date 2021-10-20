@@ -35,7 +35,7 @@ class AdvicesFragment : Fragment() {
         val root: View = binding.root
 
         binding.floatingActionButton.setOnClickListener{
-            advicesViewModel.addAdvice(Advice(id="1", url = ""))
+            advicesViewModel.addAdvice(Advice())
         }
 
         val advicesAdapter = AdvicesRvAdapter(listOf(), AdvicesRvAdapter.Listener { advice ->

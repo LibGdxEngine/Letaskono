@@ -2,10 +2,19 @@
     <string name="app_name">لِّتَسْكُنُوٓاْ</string>
 
     <string name="applicants_fragment_title">الإستمارات</string>
-    <string name="recommendations_fragment_title">الإقتراحات</string>
+    <string name="saved_applications_fragment_title">المحفوظات</string>
     <string name="display_applicant">عرض الإستمارة</string>
     <string name="advices_fragment_title">\"فمن اتبع هداي فلا يضل ولا يشقى\"</string>
 
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+        \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+    </string>
+
+    <string name="short_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+
+    <string name="middle_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin</string>
+    <string name="medium_lorem_ipsum">Quisque imperdiet nunc at massa dictum volutpat. Etiam id orci ipsum. Integer id ex dignissim</string>
 
     <string name="accountPhone_signin_title">إنشاء حساب</string>
     <string name="accountPhone_signin_body">من فضلك أدخل رقم هاتفك لتسجيل الدخول للتواصل أو لكتابة إستمارة</string>
@@ -23,7 +32,7 @@
     <string name="male">رجل</string>
     <string name="female">امرأة</string>
     <string name="welcome">السلام عليكم ورحمة الله وبركاته</string>
-    <string name="welcome_body">أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.</string>
+    <string name="welcome_body">أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.</string>
     <string name="nationality_question">ما هي جنسيتك؟</string>
     <string name="choose_answer">---قم بالإختيار من هنا---</string>
     <string name="age_question">كم عمرك؟</string>
@@ -40,4 +49,6 @@
     <string name="title_home">Home</string>
     <string name="title_advice">Advices</string>
     <string name="title_profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -7,9 +7,19 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Advice(var id :String,
                   var url :String,
+                  var title : String,
+                  var body : String,
+                  var category : String,
                   var time : String = Timestamp.now().toDate().toString()
                   ) : Parcelable
 {
-    constructor() : this(id = "" , url = "",time = Timestamp.now().toDate().toString())
+    constructor() : this(
+        id = "",
+        url = "",
+        body = "",
+        title = "",
+        category = "",
+        time = Timestamp.now().toDate().toString()
+    )
 }
 
