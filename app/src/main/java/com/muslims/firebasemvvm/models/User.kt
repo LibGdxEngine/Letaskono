@@ -1,11 +1,9 @@
 package com.muslims.firebasemvvm.models
 
 import android.os.Parcelable
-import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentSnapshot
-import com.muslims.firebasemvvm.Useree
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

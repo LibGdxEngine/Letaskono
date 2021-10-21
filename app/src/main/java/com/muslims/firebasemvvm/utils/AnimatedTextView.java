@@ -5,18 +5,18 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class Typewriter extends androidx.appcompat.widget.AppCompatTextView {
+public class AnimatedTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     private CharSequence mText;
     private int mIndex;
     private long mDelay = 500; //Default 500ms delay
 
 
-    public Typewriter(Context context) {
+    public AnimatedTextView(Context context) {
         super(context);
     }
 
-    public Typewriter(Context context, AttributeSet attrs) {
+    public AnimatedTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

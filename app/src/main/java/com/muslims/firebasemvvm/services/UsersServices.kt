@@ -1,10 +1,13 @@
 package com.muslims.firebasemvvm.services
 
 import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.muslims.firebasemvvm.models.User
 import kotlinx.coroutines.tasks.await
+
+
 
 object UsersServices {
     private const val TAG = "FirebaseUsersService"
@@ -23,6 +26,8 @@ object UsersServices {
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
+                FirebaseCrashlytics.getInstance().log("Error getting user details")
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }.await()
         return usersList
     }
@@ -42,6 +47,8 @@ object UsersServices {
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "get failed with ", exception)
+                FirebaseCrashlytics.getInstance().log("Error getting user details")
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }.await()
         return user
     }
@@ -52,7 +59,11 @@ object UsersServices {
             .document(user.id)
             .set(user)
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error writing document", e)
+                FirebaseCrashlytics.getInstance().log("Error getting user details")
+                FirebaseCrashlytics.getInstance().recordException(e)
+            }
     }
 
     suspend fun deleteUser(userId:String){

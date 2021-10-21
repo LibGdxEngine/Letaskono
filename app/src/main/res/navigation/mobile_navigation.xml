@@ -28,7 +28,16 @@
         android:id="@+id/navigation_profile"
         android:name="com.muslims.firebasemvvm.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_registrationFragment"
+            app:destination="@id/registrationStepperFragment"
+            app:popUpTo="@id/navigation_profile"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_profile_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.muslims.firebasemvvm.ui.details.DetailsFragment"
@@ -43,4 +52,12 @@
         android:name="com.muslims.firebasemvvm.ui.saved_applications.SavedApplicationsFragment"
         android:label="fragment_saved_applications"
         tools:layout="@layout/fragment_saved_applications" />
+    <fragment
+        android:id="@+id/registrationStepperFragment"
+        android:name="com.muslims.firebasemvvm.ui.registeration_stepper.RegistrationStepperFragment"
+        android:label="RegistrationStepperFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.muslims.firebasemvvm.ui.login.ui.login.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

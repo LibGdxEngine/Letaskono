@@ -14,10 +14,6 @@ import com.muslims.firebasemvvm.models.User
 
 class DetailsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DetailsFragment()
-    }
-
     private lateinit var viewModel: DetailsViewModel
 
     private var _binding: DetailsFragmentBinding? = null
@@ -35,7 +31,6 @@ class DetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
         val user = arguments?.getParcelable<User>("user")
-        Toast.makeText(context,"Hello world ${user!!.name}", Toast.LENGTH_SHORT).show()
 
         return  root
     }

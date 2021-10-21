@@ -7,7 +7,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.muslims.firebasemvvm.HomeActivity
 import com.muslims.firebasemvvm.R
-import com.muslims.firebasemvvm.utils.Typewriter
+import com.muslims.firebasemvvm.utils.AnimatedTextView
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val textViewLogo = findViewById<Typewriter>(R.id.textViewLogo)
+        val textViewLogo = findViewById<AnimatedTextView>(R.id.textViewLogo)
 
         textViewLogo.setCharacterDelay(150)
         textViewLogo.animateText(getString(R.string.app_name));

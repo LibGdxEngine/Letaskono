@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.muslims.firebasemvvm.R
-import com.muslims.firebasemvvm.databinding.FragmentDashboardBinding
 import com.muslims.firebasemvvm.databinding.FragmentSavedApplicationsBinding
-import com.muslims.firebasemvvm.ui.profile.ProfileViewModel
+
 
 class SavedApplicationsFragment : Fragment() {
     private lateinit var viewModel: SavedApplicationsViewModel
@@ -35,4 +33,8 @@ class SavedApplicationsFragment : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -7,7 +7,7 @@
     android:background="@color/md_white_1000"
     tools:context=".ui.splash.SplashActivity">
 
-    <com.muslims.firebasemvvm.utils.Typewriter
+    <com.muslims.firebasemvvm.utils.AnimatedTextView
         android:id="@+id/textViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
