@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Term of Services"
+                android:text="شروط التسجيل وسياسة الاستخدام"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
@@ -38,21 +38,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="last update January 2018"
+                android:text="أخر تحديث بتاريخ 2021"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                 android:textColor="@color/teal_200"
                 android:textStyle="italic"
                 app:fontFamily="serif" />
 
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/bt_download"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_file_download"
-            app:tint="@color/grey_60" />
 
         <ImageButton
             android:id="@+id/bt_close"
@@ -116,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/btn_rect_teal"
-            android:text="Accept"
+            android:text="أقبل بكل سرور"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -133,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/btn_rect_teal_outline"
-            android:text="Decline"
+            android:text="رفض"
             android:textStyle="bold"
             android:textAllCaps="false"
             android:textColor="@color/teal_500"

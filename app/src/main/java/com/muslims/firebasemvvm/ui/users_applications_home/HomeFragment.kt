@@ -1,10 +1,9 @@
-package com.muslims.firebasemvvm.ui.home
+package com.muslims.firebasemvvm.ui.users_applications_home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentHomeBinding
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.utils.ItemAnimation
 
 
 class HomeFragment : Fragment() {
@@ -48,6 +46,11 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.swipToRefreshLayout.setOnRefreshListener {
+            homeViewModel.getAllUsers()
+            binding.swipToRefreshLayout.isRefreshing = false
+        }
 
         binding.usersRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)

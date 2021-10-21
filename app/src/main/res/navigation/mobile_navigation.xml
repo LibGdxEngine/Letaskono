@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.muslims.firebasemvvm.ui.home.HomeFragment"
+        android:name="com.muslims.firebasemvvm.ui.users_applications_home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_detailsFragment"
-            app:destination="@id/detailsFragment"
+            app:destination="@id/UsersDetailsFragment"
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true"
             app:launchSingleTop="true" />
@@ -22,7 +22,11 @@
         android:id="@+id/navigation_advices"
         android:name="com.muslims.firebasemvvm.ui.advices.AdvicesFragment"
         android:label="@string/title_advice"
-        tools:layout="@layout/fragment_advices" />
+        tools:layout="@layout/fragment_advices" >
+        <action
+            android:id="@+id/action_navigation_advices_to_adviceDetailsFragment"
+            app:destination="@id/adviceDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -39,10 +43,10 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.muslims.firebasemvvm.ui.details.DetailsFragment"
-        android:label="details_fragment"
-        tools:layout="@layout/details_fragment" >
+        android:id="@+id/UsersDetailsFragment"
+        android:name="com.muslims.firebasemvvm.ui.user_details.UsersDetailsFragment"
+        android:label="users_details_fragment"
+        tools:layout="@layout/details_fragment">
         <argument
             android:name="user"
             app:argType="com.muslims.firebasemvvm.models.User" />
@@ -51,7 +55,11 @@
         android:id="@+id/savedApplicationsFragment"
         android:name="com.muslims.firebasemvvm.ui.saved_applications.SavedApplicationsFragment"
         android:label="fragment_saved_applications"
-        tools:layout="@layout/fragment_saved_applications" />
+        tools:layout="@layout/fragment_saved_applications" >
+        <action
+            android:id="@+id/action_savedApplicationsFragment_to_navigation_home3"
+            app:destination="@id/navigation_home" />
+    </fragment>
     <fragment
         android:id="@+id/registrationStepperFragment"
         android:name="com.muslims.firebasemvvm.ui.registeration_stepper.RegistrationStepperFragment"
@@ -60,4 +68,13 @@
         android:id="@+id/loginFragment"
         android:name="com.muslims.firebasemvvm.ui.login.ui.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/adviceDetailsFragment"
+        android:name="com.muslims.firebasemvvm.ui.advice_details.AdviceDetailsFragment"
+        android:label="advice_details_fragment"
+        tools:layout="@layout/advice_details_fragment" >
+        <argument
+            android:name="advice"
+            app:argType="com.muslims.firebasemvvm.models.Advice" />
+    </fragment>
 </navigation>

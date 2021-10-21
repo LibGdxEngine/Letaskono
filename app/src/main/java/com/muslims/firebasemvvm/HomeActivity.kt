@@ -50,10 +50,10 @@ class HomeActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.detailsFragment -> {
-                    supportActionBar?.hide() // to hide
-                    navView.visibility = View.GONE
-                }
+//                R.id.UsersDetailsFragment -> {
+//                    supportActionBar?.hide() // to hide
+//                    navView.visibility = View.GONE
+//                }
                 R.id.registrationStepperFragment -> {
                     supportActionBar?.hide() // to hide
                     navView.visibility = View.GONE
@@ -63,8 +63,8 @@ class HomeActivity : AppCompatActivity() {
                     navView.visibility = View.GONE
                 }
                 else -> {
-                supportActionBar?.show() // to show
-                navView.visibility = View.VISIBLE
+                    supportActionBar?.show() // to show
+                    navView.visibility = View.VISIBLE
                 }
             }
         }

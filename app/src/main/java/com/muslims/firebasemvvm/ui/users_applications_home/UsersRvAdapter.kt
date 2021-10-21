@@ -1,14 +1,13 @@
-package com.muslims.firebasemvvm.ui.home
+package com.muslims.firebasemvvm.ui.users_applications_home
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.UserViewItemBinding
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.ui.home.UsersRvAdapter.ViewHolder
+import com.muslims.firebasemvvm.ui.users_applications_home.UsersRvAdapter.ViewHolder
 import com.muslims.firebasemvvm.utils.ItemAnimation
 
 class UsersRvAdapter(var users:List<User> , var listener : Listener,private val animationType : Int = 2) : RecyclerView.Adapter<ViewHolder>() {

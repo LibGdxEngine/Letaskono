@@ -3,6 +3,8 @@ package com.muslims.firebasemvvm.ui.advices
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.muslims.firebasemvvm.databinding.AdviceViewItemBinding
 import com.muslims.firebasemvvm.models.Advice
 import io.github.ponnamkarthik.richlinkpreview.ViewListener
@@ -16,9 +18,18 @@ class AdvicesRvAdapter(var advicesList:List<Advice>, val listener:Listener): Rec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = advicesList.get(position)
+        val image = holder.binding.image
+        holder.apply {
+            binding.date.text =  currentItem.time
+            binding.subtitle.text = currentItem.category
+            binding.adviceTitle.text = currentItem.title
+            Glide.with(holder.binding.image.context)
+                .load(currentItem.url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(image)
 
-        holder.itemView.setOnClickListener{
-            listener.onClick(currentItem)
+            itemView.setOnClickListener { listener.onClick(currentItem) }
         }
     }
 

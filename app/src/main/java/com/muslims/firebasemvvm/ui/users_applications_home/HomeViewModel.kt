@@ -1,4 +1,4 @@
-package com.muslims.firebasemvvm.ui.home
+package com.muslims.firebasemvvm.ui.users_applications_home
 
 import android.util.Log
 import androidx.lifecycle.LiveData

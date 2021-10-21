@@ -1,4 +1,4 @@
-package com.muslims.firebasemvvm.ui.details
+package com.muslims.firebasemvvm.ui.user_details
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,15 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.DetailsFragmentBinding
-import com.muslims.firebasemvvm.databinding.FragmentHomeBinding
 import com.muslims.firebasemvvm.models.User
 
-class DetailsFragment : Fragment() {
+class UsersDetailsFragment : Fragment() {
 
-    private lateinit var viewModel: DetailsViewModel
+    private lateinit var viewModelUsers: UsersDetailsViewModel
 
     private var _binding: DetailsFragmentBinding? = null
 
@@ -28,7 +25,7 @@ class DetailsFragment : Fragment() {
     ): View? {
         _binding = DetailsFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
+        viewModelUsers = ViewModelProvider(this).get(UsersDetailsViewModel::class.java)
 
         val user = arguments?.getParcelable<User>("user")
 

@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.models.Advice
 import com.muslims.firebasemvvm.services.AdvicesServices
-import com.muslims.firebasemvvm.ui.home.FireStoreStatus
+import com.muslims.firebasemvvm.ui.users_applications_home.FireStoreStatus
 import kotlinx.coroutines.launch
 
 
