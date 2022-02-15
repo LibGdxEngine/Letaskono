@@ -24,7 +24,7 @@ import com.muslims.firebasemvvm.databinding.DrawerLayoutBinding
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: DrawerLayoutBinding
-
+    private lateinit var navView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DrawerLayoutBinding.inflate(layoutInflater)
@@ -33,7 +33,8 @@ class HomeActivity : AppCompatActivity() {
         binding.includedHome.toolbar.setTitle(R.string.app_name)
         setSupportActionBar(binding.includedHome.toolbar)
         
-        val navView: BottomNavigationView = binding.includedHome.navView
+
+        navView = binding.includedHome.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         // Passing each menu ID as a set of Ids because each
@@ -49,25 +50,22 @@ class HomeActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-//                R.id.UsersDetailsFragment -> {
-//                    supportActionBar?.hide() // to hide
-//                    navView.visibility = View.GONE
-//                }
-                R.id.registrationStepperFragment -> {
-                    supportActionBar?.hide() // to hide
-                    navView.visibility = View.GONE
-                }
-                R.id.loginFragment -> {
-                    supportActionBar?.hide() // to hide
-                    navView.visibility = View.GONE
-                }
-                else -> {
-                    supportActionBar?.show() // to show
-                    navView.visibility = View.VISIBLE
-                }
+            val fullScreenFragments = arrayOf(
+                    R.id.questionsFragment,
+                    R.id.registrationStepperFragment,
+                    R.id.loginFragment,
+                    )
+            if(destination.id in fullScreenFragments){
+                enterFullScreen(true);
+            }else{
+                enterFullScreen(false)
             }
         }
+    }
+
+    private fun enterFullScreen(isFullScreen: Boolean) {
+        if(isFullScreen) supportActionBar?.hide() else supportActionBar?.show()
+        if(isFullScreen) navView.visibility = View.GONE else navView.visibility = View.VISIBLE
     }
 
     private fun initMainDrawer() {

@@ -63,7 +63,11 @@
     <fragment
         android:id="@+id/registrationStepperFragment"
         android:name="com.muslims.firebasemvvm.ui.registeration_stepper.RegistrationStepperFragment"
-        android:label="RegistrationStepperFragment" />
+        android:label="RegistrationStepperFragment" >
+        <action
+            android:id="@+id/action_registrationStepperFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.muslims.firebasemvvm.ui.login.ui.login.LoginFragment"
@@ -77,4 +81,9 @@
             android:name="advice"
             app:argType="com.muslims.firebasemvvm.models.Advice" />
     </fragment>
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="com.muslims.firebasemvvm.ui.regesteration_questions_form.QuestionsFragment"
+        android:label="fragment_questions_list"
+        tools:layout="@layout/fragment_questions_list" />
 </navigation>

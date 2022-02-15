@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
@@ -75,7 +76,9 @@ class RegistrationStepperFragment : Fragment() {
                 // move to next screen
                 binding.viewPager.setCurrentItem(current)
             } else {
-                //TODO: what happen when stepper finish
+                //happen when stepper finish
+                requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
+                    .navigate(R.id.action_registrationStepperFragment_to_questionsFragment)
             }
         })
     }
@@ -114,6 +117,7 @@ class RegistrationStepperFragment : Fragment() {
             } else {
                 binding.btnNext.setText("التالي")
                 binding.btnNext.setBackgroundResource(R.color.colorPrimary)
+
             }
         }
 
