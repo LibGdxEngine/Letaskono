@@ -1,11 +1,13 @@
 package com.muslims.firebasemvvm
 
+import android.R.id.toggle
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -19,12 +21,15 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import com.mikepenz.materialdrawer.model.SectionDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.muslims.firebasemvvm.databinding.DrawerLayoutBinding
+import com.muslims.firebasemvvm.utils.DrawerLocker
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), DrawerLocker {
 
     private lateinit var binding: DrawerLayoutBinding
     private lateinit var navView: BottomNavigationView
+    var filterDrawer: View? = null
+    var mainDrawer: Drawer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DrawerLayoutBinding.inflate(layoutInflater)
@@ -44,8 +49,9 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_advices, R.id.navigation_profile, R.id.savedApplicationsFragment
             )
         )
-        initMainDrawer()
-        initFilterDrawer()
+
+        mainDrawer = initMainDrawer()
+        filterDrawer = initFilterDrawer()
 
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -68,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
         if(isFullScreen) navView.visibility = View.GONE else navView.visibility = View.VISIBLE
     }
 
-    private fun initMainDrawer() {
+    private fun initMainDrawer() : Drawer{
         //create the drawer and remember the `Drawer` result object
         val drawer1 = DrawerBuilder()
             .withActivity(this)
@@ -92,9 +98,10 @@ class HomeActivity : AppCompatActivity() {
                 }
             })
             .build()
+        return drawer1
     }
 
-    private fun initFilterDrawer() {
+    private fun initFilterDrawer() : View {
 
         binding.btnApply.setOnClickListener {
             binding.drawerLayout.closeDrawer(GravityCompat.END)
@@ -107,7 +114,14 @@ class HomeActivity : AppCompatActivity() {
         binding.includedHome.filterButton.setOnClickListener{
             binding.drawerLayout.openDrawer(GravityCompat.END)
         }
-
-
+        return binding.drawerLayout
     }
+
+    override fun setDrawerEnabled(enabled: Boolean) {
+        val lockMode =
+            if (enabled) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+        binding.drawerLayout.setDrawerLockMode(lockMode)
+        mainDrawer?.drawerLayout?.setDrawerLockMode(lockMode)
+    }
+
 }
