@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/welcomeToAppStepperFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -13,9 +13,8 @@
         <action
             android:id="@+id/action_navigation_home_to_detailsFragment"
             app:destination="@id/UsersDetailsFragment"
-            app:popUpTo="@id/navigation_home"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true" />
+            app:popUpTo="@id/UsersDetailsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -34,13 +33,11 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_navigation_profile_to_registrationFragment"
-            app:destination="@id/registrationStepperFragment"
-            app:popUpTo="@id/navigation_profile"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_navigation_profile_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/UsersDetailsFragment"
@@ -61,16 +58,18 @@
             app:destination="@id/navigation_home" />
     </fragment>
     <fragment
-        android:id="@+id/registrationStepperFragment"
-        android:name="com.muslims.firebasemvvm.ui.registeration_stepper.RegistrationStepperFragment"
+        android:id="@+id/welcomeToAppStepperFragment"
+        android:name="com.muslims.firebasemvvm.ui.welcome_to_app_stepper.WelcomeToAppStepperFragment"
         android:label="RegistrationStepperFragment" >
         <action
-            android:id="@+id/action_registrationStepperFragment_to_questionsFragment"
-            app:destination="@id/questionsFragment" />
+            android:id="@+id/action_welcomeToAppStepperFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/welcomeToAppStepperFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.muslims.firebasemvvm.ui.login.ui.login.LoginFragment"
+        android:name="com.muslims.firebasemvvm.ui.login_registeration.ui.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/adviceDetailsFragment"
@@ -83,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/questionsFragment"
-        android:name="com.muslims.firebasemvvm.ui.regesteration_questions_form.QuestionsFragment"
+        android:name="com.muslims.firebasemvvm.ui.main_questions_form.QuestionsFragment"
         android:label="fragment_questions_list"
         tools:layout="@layout/fragment_questions_list" />
 </navigation>

@@ -36,7 +36,7 @@ class ProfileFragment : Fragment() {
         binding.termsOfUse.setOnClickListener{ showTermServicesDialog() }
 
         binding.btnCreateAccount.setOnClickListener {
-            this.findNavController().navigate(R.id.action_navigation_profile_to_registrationFragment,
+            this.findNavController().navigate(R.id.action_navigation_profile_to_questionsFragment,
                 null,
                 navOptions {
                     anim{

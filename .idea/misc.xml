@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/drawable/man_or_woman_images_border.xml" value="0.1765" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/drawable/question_text_background.xml" value="0.171" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/drawable/radio_btn_backround.xml" value="0.171" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/drawable/radio_btn_selected.xml" value="0.171" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/drawable/radio_btn_unselected.xml" value="0.171" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/drawer_layout.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/fragment_home.xml" value="0.1408514492753623" />
+        <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/fragment_profile.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/fragment_questions.xml" value="0.22" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/fragment_questions_list.xml" value="0.1408514492753623" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/question_radio_btn.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/questions_row.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/registeration_fragment.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/A.Ramadan.ext/AndroidStudioProjects/Letaskono/app/src/main/res/layout/registration_fragment.xml" value="0.1408514492753623" />
       </map>
     </option>

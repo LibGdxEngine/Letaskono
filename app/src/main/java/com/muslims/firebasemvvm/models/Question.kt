@@ -6,4 +6,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Question(var id: String = "",
                     var questionText: String = "",
-                    var answer: Answer? = null) : Parcelable
+                    var answers: List<Answer>) : Parcelable

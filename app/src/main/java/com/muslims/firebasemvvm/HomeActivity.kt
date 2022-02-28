@@ -1,6 +1,5 @@
 package com.muslims.firebasemvvm
 
-import android.R.id.toggle
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -58,7 +57,7 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val fullScreenFragments = arrayOf(
                     R.id.questionsFragment,
-                    R.id.registrationStepperFragment,
+                    R.id.welcomeToAppStepperFragment,
                     R.id.loginFragment,
                     )
             if(destination.id in fullScreenFragments){
