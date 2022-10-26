@@ -35,5 +35,4 @@ class RegisterationFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(RegisterationViewModel::class.java)
         // TODO: Use the ViewModel
     }
-
 }
