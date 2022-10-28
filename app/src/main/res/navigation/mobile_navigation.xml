@@ -36,8 +36,8 @@
             android:id="@+id/action_navigation_profile_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_navigation_profile_to_questionsFragment"
-            app:destination="@id/questionsFragment" />
+            android:id="@+id/action_navigation_profile_to_registerationFragment"
+            app:destination="@id/registerationFragment" />
     </fragment>
     <fragment
         android:id="@+id/UsersDetailsFragment"
@@ -85,4 +85,16 @@
         android:name="com.muslims.firebasemvvm.ui.main_questions_form.QuestionsFragment"
         android:label="fragment_questions_list"
         tools:layout="@layout/fragment_questions_list" />
+    <fragment
+        android:id="@+id/registerationFragment"
+        android:name="com.muslims.firebasemvvm.ui.login_registeration.ui.register.RegisterationFragment"
+        android:label="registeration_fragment"
+        tools:layout="@layout/registeration_fragment" >
+        <action
+            android:id="@+id/action_registerationFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+    </fragment>
 </navigation>

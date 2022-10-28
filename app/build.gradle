@@ -89,6 +89,8 @@ dependencies {
     implementation 'com.mikepenz:octicons-typeface:11.1.0.0-kotlin@aar'
     //to prevent initialization problems
     implementation "androidx.startup:startup-runtime:1.0.0"
+    //Tap target view
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
 }
 // ADD THIS AT THE BOTTOM
 apply plugin: 'com.google.gms.google-services'

@@ -69,7 +69,8 @@ class WelcomeToAppStepperFragment : Fragment() {
 
     private fun initComponent() {
         binding.btClose.setOnClickListener {
-            this.findNavController().popBackStack()
+            val navController = requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
+            navController.navigate(R.id.action_welcomeToAppStepperFragment_to_navigation_home)
         }
         // adding bottom dots
         bottomProgressDots(0)
@@ -83,7 +84,6 @@ class WelcomeToAppStepperFragment : Fragment() {
                 binding.viewPager.setCurrentItem(current)
             } else {
                 //happen when stepper finish
-
                 val navController = requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
                 navController.navigate(R.id.action_welcomeToAppStepperFragment_to_navigation_home)
             }

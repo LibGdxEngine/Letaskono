@@ -11,4 +11,9 @@ sealed class QuestionDataModel {
         var answer: String? = "",
         var note: String? = ""
     ) : QuestionDataModel()
+    data class NumericInput(
+        val question: String,
+        var answer: String? = "",
+        var note: String? = ""
+    ) : QuestionDataModel()
 }

@@ -153,13 +153,14 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
             navController.navigate(R.id.navigation_home)
         } else if (currentFragment == R.id.navigation_home) {
             showMaterialExitMessage(this)
+        } else if (currentFragment == R.id.questionsFragment) {
+            showMaterialQuestionsExitMessage(this)
         } else {
             super.onBackPressed()
         }
     }
 
     private fun showMaterialExitMessage(ctx: Context) {
-
         MaterialAlertDialogBuilder(ctx)
             .setTitle("هل تريد الخروج فعلا ؟")
             .setMessage("")
@@ -170,7 +171,22 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
                 "خروج"
             ) { dialogInterface, i -> finish() }
             .show()
+    }
 
+    private fun showMaterialQuestionsExitMessage(ctx: Context) {
+        MaterialAlertDialogBuilder(ctx)
+            .setTitle("هل تريد الخروج فعلا ؟")
+            .setMessage("إذا خرجت الأن فلن يتم تسجيل الإجابات التي أدخلتها")
+            .setPositiveButton(
+                "البقاء"
+            ) { dialogInterface, i -> dialogInterface.dismiss() }
+            .setNegativeButton(
+                "خروج"
+            ) { dialogInterface, i ->
+                val navController = findNavController(R.id.nav_host_fragment_activity_home)
+                navController.navigate(R.id.navigation_home)
+            }
+            .show()
     }
 
 }

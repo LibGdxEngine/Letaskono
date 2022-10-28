@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentQuestionsListBinding
-import com.muslims.firebasemvvm.models.Question
 import com.muslims.firebasemvvm.models.QuestionDataModel
-
 import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
 import com.muslims.firebasemvvm.utils.DrawerLocker
 
@@ -26,7 +25,8 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
     private var _binding: FragmentQuestionsListBinding? = null
     private var currentQuestionIndex = 0
     private var mToast: Toast? = null
-
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var selectedGender: String
     private val questionsRvAdapter: QuestionsRvAdapter by lazy {
         QuestionsRvAdapter(this@QuestionsFragment)
     }
@@ -50,9 +50,11 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
 
         disableDrawer()
 
-        val recyclerView = binding.list
+        selectedGender = arguments?.getString("gender").toString()
+        recyclerView = binding.list
 
-
+        _binding!!.textViewLogo.setCharacterDelay(150)
+        _binding!!.textViewLogo.animateText(getString(R.string.app_name));
         // Set the adapter
         if (recyclerView is RecyclerView) {
             with(recyclerView) {
@@ -72,28 +74,8 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                 adapter = questionsRvAdapter
             }
         }
-        questionsRvAdapter.setData(QuestionsContent.Questions)
+        questionsRvAdapter.setData(QuestionsContent.items(selectedGender))
 
-        binding.nextBtn.setOnClickListener {
-            if (currentQuestionIndex < QuestionsContent.Questions.size - 1)//max number of questions
-                recyclerView.scrollToPosition(++currentQuestionIndex)
-            else {
-                //finish questions and go to other page
-                if (mToast != null) mToast?.cancel();
-                mToast = Toast.makeText(context, "شكرا لك", Toast.LENGTH_LONG);
-                mToast?.show();
-            }
-        }
-        binding.backBtn.setOnClickListener {
-            if (currentQuestionIndex >= 1)
-                recyclerView.scrollToPosition(--currentQuestionIndex)
-//                mAdapter.setAnswer(index, asnwer)
-            else {
-                if (mToast != null) mToast?.cancel();
-                mToast = Toast.makeText(context, "لا يمكنك الرجوع أكثر", Toast.LENGTH_LONG);
-                mToast?.show();
-            }
-        }
         return binding.root
     }
 
@@ -116,18 +98,47 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
             }
     }
 
+    override fun onNextButtonClicked() {
+        if (currentQuestionIndex < QuestionsContent.items(selectedGender).size - 1) {//max number of questions
+            val item = QuestionsContent.items(selectedGender)[currentQuestionIndex]
+            if (submittedAnswerIsValid(item)) {
+                recyclerView.scrollToPosition(++currentQuestionIndex)
+            } else {
+                if (mToast != null) mToast?.cancel();
+                mToast = Toast.makeText(context, "هذا السؤال ليس اختياريا!", Toast.LENGTH_LONG);
+                mToast?.show();
+            }
 
-    override fun onAnswerItemClick(index: Int, answerText: String, note: String?) {
-        var questionDataModel = QuestionsContent.Questions[currentQuestionIndex]
-        if (questionDataModel is QuestionDataModel.MCQ) {
-            questionDataModel.selectedAnswer = answerText
-        } else if (questionDataModel is QuestionDataModel.TextInput) {
-            questionDataModel.answer = answerText
-            questionDataModel.answer = note
+
+        } else {
+            //finish questions and go to other page
+            if (mToast != null) mToast?.cancel();
+            mToast = Toast.makeText(context, "شكرا لك", Toast.LENGTH_LONG);
+            mToast?.show();
         }
-        if (mToast != null) mToast?.cancel();
-        var text: String? = answerText
-        mToast = Toast.makeText(context, text + " " + index.toString(), Toast.LENGTH_LONG);
-        mToast?.show();
     }
+
+    private fun submittedAnswerIsValid(item: QuestionDataModel): Boolean {
+        var answerIsValid = false
+        if (item is QuestionDataModel.MCQ) {
+            answerIsValid = !item.selectedAnswer.toString().isNullOrEmpty()
+        } else if (item is QuestionDataModel.TextInput) {
+            answerIsValid = !item.answer.toString().isNullOrEmpty()
+        } else if (item is QuestionDataModel.NumericInput) {
+            answerIsValid = !item.answer.toString().isNullOrEmpty()
+        }
+        return answerIsValid
+    }
+
+
+    override fun onBackButtonClicked() {
+        if (currentQuestionIndex >= 1) {
+            recyclerView.scrollToPosition(--currentQuestionIndex)
+        } else {
+            if (mToast != null) mToast?.cancel();
+            mToast = Toast.makeText(context, "لا يمكنك الرجوع أكثر", Toast.LENGTH_LONG);
+            mToast?.show();
+        }
+    }
+
 }

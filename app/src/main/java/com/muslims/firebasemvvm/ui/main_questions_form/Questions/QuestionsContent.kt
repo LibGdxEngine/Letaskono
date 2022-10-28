@@ -7,7 +7,17 @@ import java.util.HashMap
 
 object QuestionsContent {
     private val TAG = this.javaClass.canonicalName
-    public val Questions = mutableListOf<QuestionDataModel>(
+
+    fun items(type: String): MutableList<QuestionDataModel> {
+        if (type == "man") {
+            return MAN_QUESTIONS
+        } else {
+            WOMAN_QUESTIONS
+        }
+        return Questions
+    }
+
+    private var Questions = mutableListOf(
         QuestionDataModel.MCQ(
             question = "ما مدى التزامك بالصلاة ؟",
             answers = listOf(
@@ -18,79 +28,72 @@ object QuestionsContent {
                 "لا أصلي والعياذ بالله",
             )
         ),
-        QuestionDataModel.MCQ(
-            question = "هل تشاهد الأفلام او تستمع إلى الموسيقى ؟",
-            answers = listOf("لا أبدا", "نعم كثيرا", "نادرا")
+        QuestionDataModel.NumericInput(
+            question = "ما هو سنك؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما هي جنسيتك؟",
+        ),
+        QuestionDataModel.NumericInput(
+            question = "ما هو طولك؟",
+        ),
+        QuestionDataModel.NumericInput(
+            question = "ما هو وزنك؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما هو مؤهلك التعليمي؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما هي وظيفتك؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "إلى أي محافظة تنتمي/ـين في الأصل؟ وأين تعيش/ـين حاليا؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما هو عمل الوالد؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما هو عمل الوالدة؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما عدد الإخوة والأخوات وأعمارهم ومؤهلاتهم؟",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما مقدار حفظك للقران؟",
         ),
         QuestionDataModel.MCQ(
-            question = "هل تشاهد الأفلام او تستمع إلى الموسيقى ؟",
+            question = "هل تشاهد/ـي الأفلام او تستمع/ـين إلى الموسيقى أو الأغاني ؟",
             answers = listOf("لا أبدا", "نعم كثيرا", "نادرا")
         ),
         QuestionDataModel.TextInput(
-            question = "عمل الوالد؟",
+            question = "هل لديك أي انتمائات دينية؟",
         ),
         QuestionDataModel.TextInput(
-            question = "اسمك ايه ياسطا؟",
-        )
+            question = "تكلم/ـي عن نفسك (أو ما يقوله الناس عنك)",
+        ),
+        QuestionDataModel.TextInput(
+            question = "ما هي المواصفات التي تريدها في شريك/ـة حياتك؟",
+        ),
+    )
 
-        )
-
-//    private val QUESTIONS_TEXT = listOf<String>(
-//        "ما مدى التزامك بالصلاة ؟",
-//        "هل تشاهد الأفلام او تستمع إلى الموسيقى ؟",
-//        "هل أنت ملتحي ؟",
-//        "ما هو نوع حجابك ؟",
-//        "عمل الوالد؟"
-//    )
-
-//    private val ANSWERS_TEXT = hashMapOf(
-//        QUESTIONS_TEXT[0] to listOf(
-//            "أصلي جميع الصلوات في المسجد",
-//            "أصلي بعض الصلوات في المسجد وبعضها في المنزل",
-//            "أصلي جميع الصلوات في المنزل في وقتها",
-//            "متقطع في الصلاة",
-//            "لا أصلي والعياذ بالله",
-//        ),
-//        QUESTIONS_TEXT[1] to listOf("لا أبدا", "نعم كثيرا", "نادرا"),
-//        QUESTIONS_TEXT[2] to listOf("نعم", "لحية خفيفة", "لا لست ملتحيا"),
-//        QUESTIONS_TEXT[3] to listOf("منتقبة", "خمار", "طرحة", "غير محجبة"),
-//        QUESTIONS_TEXT[4] to listOf("مبرمج", "خياط", "حشاش")
-//    )
-//
-//    val ITEMS: MutableList<Question> = ArrayList()
-//
-//    val ITEM_MAP: MutableMap<String, Question> = HashMap()
-
-//    private val COUNT = QUESTIONS_TEXT.size
-////
-////    init {
-////        for (i in 1..COUNT) {
-////            addItem(createQuestionItem(i))
-////        }
-////    }
-//
-//    private fun addItem(item: Question) {
-//        ITEMS.add(item)
-//        ITEM_MAP.put(item.id, item)
-//    }
-
-//    private fun createQuestionItem(position: Int): Question {
-//        val questionText = QUESTIONS_TEXT[position - 1]
-//        return Question(
-//            position.toString(),
-//            questionText,
-//            answersListOf(questionText)
-//        )
-//    }
+    private var MAN_QUESTIONS = mutableListOf<QuestionDataModel>(
+        QuestionDataModel.MCQ(
+            question = "الحالة الإجتماعية",
+            answers = listOf("متزوج", "أرمل", "مطلق", "أعزب")
+        ),
+    )
 
 
-//    private fun answersListOf(questionText: String): List<Answer> {
-//        val answers = mutableListOf<Answer>()
-//        val questionAnswers = ANSWERS_TEXT[questionText]
-//        for (i in 1..questionAnswers!!.size) {
-//            answers.add(Answer(questionAnswers[i - 1]))
-//        }
-//        return answers
-//    }
+    private var WOMAN_QUESTIONS = mutableListOf<QuestionDataModel>(
+        QuestionDataModel.MCQ(
+            question = "الحالة الإجتماعية",
+            answers = listOf("عزباء", "أرملة", "مطلقة")
+        ),
+    )
+
+    init {
+        MAN_QUESTIONS.addAll(0, Questions)
+        WOMAN_QUESTIONS.addAll(0, Questions)
+    }
 
 }
