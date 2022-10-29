@@ -6,14 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentQuestionsListBinding
+import com.muslims.firebasemvvm.models.Question
 import com.muslims.firebasemvvm.models.QuestionDataModel
+import com.muslims.firebasemvvm.models.User
+
 import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
 import com.muslims.firebasemvvm.utils.DrawerLocker
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 
 /**
@@ -23,10 +31,12 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
 
     private var columnCount = 1
     private var _binding: FragmentQuestionsListBinding? = null
+    private lateinit var viewModel: QuestionsFragmentViewModel
     private var currentQuestionIndex = 0
     private var mToast: Toast? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var selectedGender: String
+    private var currentUser: User? = null
     private val questionsRvAdapter: QuestionsRvAdapter by lazy {
         QuestionsRvAdapter(this@QuestionsFragment)
     }
@@ -46,6 +56,8 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel =
+            ViewModelProvider(this).get(QuestionsFragmentViewModel::class.java)
         _binding = FragmentQuestionsListBinding.inflate(inflater, container, false)
 
         disableDrawer()
@@ -75,6 +87,67 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
             }
         }
         questionsRvAdapter.setData(QuestionsContent.items(selectedGender))
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
+            currentUser = user
+        })
+
+        viewModel.getUserStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
+                AuthenticationStatus.LOADING -> {
+
+                }
+                AuthenticationStatus.DONE -> {
+                    val questionsList = mutableListOf<Question>()
+                    val data: Map<String, Any> = HashMap()
+                    for (item in QuestionsContent.items(selectedGender)) {
+                        var id: String? = null
+                        var question: String? = null
+                        var answer: String? = null
+                        var note: String? = null
+                        if (item is QuestionDataModel.MCQ) {
+                            id = item.id
+                            question = item.question
+                            answer = item.selectedAnswer
+                        } else if (item is QuestionDataModel.TextInput) {
+                            id = item.id
+                            question = item.question
+                            answer = item.answer
+                            note = item.note
+                        } else if (item is QuestionDataModel.NumericInput) {
+                            id = item.id
+                            question = item.question
+                            answer = item.answer
+                            note = item.note
+                        }
+                        questionsList.add(Question(id!!, question!!, answer!!, note))
+                    }
+                    currentUser?.questionsList = questionsList
+                    viewModel.updateUser(currentUser!!)
+                }
+                AuthenticationStatus.ERROR -> {
+
+                }
+            }
+        })
+
+        viewModel.updatingStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
+                UpdatingStatus.LOADING -> {
+
+                }
+                UpdatingStatus.DONE -> {
+                    StoredAuthUser.setUserInfoCompleted(requireContext(), true)
+                    goToNextScreen()
+                    if (mToast != null) mToast?.cancel();
+                    mToast = Toast.makeText(context, "شكرا لك", Toast.LENGTH_LONG);
+                    mToast?.show();
+                }
+                UpdatingStatus.ERROR -> {
+
+                }
+            }
+        })
 
         return binding.root
     }
@@ -112,10 +185,25 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
 
         } else {
             //finish questions and go to other page
+            val userId = StoredAuthUser.getUser(requireContext())
+            viewModel.getSignedInUser(userId)
             if (mToast != null) mToast?.cancel();
-            mToast = Toast.makeText(context, "شكرا لك", Toast.LENGTH_LONG);
+            mToast = Toast.makeText(context, "GO ${userId}", Toast.LENGTH_LONG);
             mToast?.show();
         }
+    }
+
+    private fun goToNextScreen() {
+//        val bundle = bundleOf("gender" to selectedGender)
+        this.findNavController()
+            .navigate(R.id.action_questionsFragment_to_navigation_home,
+                null,
+                navOptions {
+                    anim {
+                        enter = android.R.anim.slide_in_left
+                        exit = android.R.anim.slide_out_right
+                    }
+                })
     }
 
     private fun submittedAnswerIsValid(item: QuestionDataModel): Boolean {

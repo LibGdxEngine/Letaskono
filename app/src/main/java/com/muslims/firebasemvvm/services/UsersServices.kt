@@ -8,7 +8,6 @@ import com.muslims.firebasemvvm.models.User
 import kotlinx.coroutines.tasks.await
 
 
-
 object UsersServices {
     private const val TAG = "FirebaseUsersService"
     private const val COLLECTION_NAME = "Users"
@@ -32,17 +31,17 @@ object UsersServices {
         return usersList
     }
 
-    suspend fun getUserById(userId :String):User?{
+    suspend fun getUserByPhoneNumber(phone: String): User? {
         val db = FirebaseFirestore.getInstance()
         var user: User? = null
-        val docRef = db.collection(COLLECTION_NAME).document(userId)
+        val docRef = db.collection(COLLECTION_NAME).document(phone)
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     user = document.toObject<User>()
                 } else {
-                    Log.d(TAG, "No such document")
+                    Log.d(TAG, "No such User")
                 }
             }
             .addOnFailureListener { exception ->
@@ -53,27 +52,33 @@ object UsersServices {
         return user
     }
 
-    suspend fun addUser(user:User){
+    suspend fun addUser(user: User): Boolean {
+        var userAdded = true
         val db = FirebaseFirestore.getInstance()
         db.collection(COLLECTION_NAME)
-            .document(user.id)
+            .document(user.phone)
             .set(user)
-            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+            .addOnSuccessListener {
+                Log.d(TAG, "DocumentSnapshot successfully written!")
+                userAdded = true
+            }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error writing document", e)
                 FirebaseCrashlytics.getInstance().log("Error getting user details")
                 FirebaseCrashlytics.getInstance().recordException(e)
+                userAdded = false
             }
+        return userAdded
     }
 
-    suspend fun deleteUser(userId:String){
+    suspend fun deleteUser(userId: String) {
 
     }
 
-    suspend fun updateUser(user:User){
+    suspend fun updateUser(user: User){
         val db = FirebaseFirestore.getInstance()
         db.collection(COLLECTION_NAME)
-            .document(user.id)
+            .document(user.phone)
             .set(user)
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }

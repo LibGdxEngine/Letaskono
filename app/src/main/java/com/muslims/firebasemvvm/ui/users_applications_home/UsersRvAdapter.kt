@@ -22,9 +22,9 @@ class UsersRvAdapter(var users:List<User> , var listener : Listener,private val 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = users.get(position)
-        when(user.sex){
-            "Male" ->{ holder.binding.image.setImageResource(R.drawable.man_with_lehya) }
-            "Female" ->{ holder.binding.image.setImageResource(R.drawable.man_without_lehya) }
+        when(user.gender){
+            "man" ->{ holder.binding.image.setImageResource(R.drawable.man_with_lehya) }
+            "woman" ->{ holder.binding.image.setImageResource(R.drawable.man_without_lehya) }
         }
         holder.itemView.setOnClickListener{
             listener.onClick(user)

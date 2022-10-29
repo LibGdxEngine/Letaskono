@@ -2,64 +2,121 @@ package com.muslims.firebasemvvm.ui.login_registeration.ui.register
 
 
 import android.graphics.Typeface
-import android.graphics.drawable.Drawable
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
+import com.muslims.firebasemvvm.HomeActivity
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.RegisterationFragmentBinding
+import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
+import com.muslims.firebasemvvm.utils.AuthenticatedUser
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 
-class RegisterationFragment : Fragment() {
+class RegistrationFragment : Fragment() {
 
-    private lateinit var viewModel: RegisterationViewModel
+    private lateinit var viewModel: RegistrationViewModel
     private var _binding: RegisterationFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private var selectedGender: String? = null
+    var signedInUser: User? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel =
+            ViewModelProvider(this).get(RegistrationViewModel::class.java)
         _binding = RegisterationFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         showTapTarget()
 
+        val userName = binding.username
         val phone = binding.phoneNumber
         val password = binding.password
 
         binding.submitAccountBtn.setOnClickListener {
-            if (phoneIsValid(phone.text.toString()) and passwordIsValid(password.text.toString())) {
-                val bundle = bundleOf("gender" to selectedGender)
-                this.findNavController()
-                    .navigate(R.id.action_registerationFragment_to_questionsFragment,
-                        bundle,
-                        navOptions {
-                            anim {
-                                enter = android.R.anim.slide_in_left
-                                exit = android.R.anim.slide_out_right
-                            }
-                        })
-            }else if(!phoneIsValid(phone.text.toString())){
+            if (userNameIsValid(userName.text.toString().trim()) and phoneIsValid(
+                    phone.text.toString().trim()
+                ) and passwordIsValid(password.text.toString().trim())
+            ) {
+                viewModel.checkIfNumberIsAlreadySignedUp(phone.text.toString().trim())
+            } else if (!userNameIsValid(userName.text.toString())) {
+                userName.error = "اسم المستخدم غير صالح"
+            } else if (!phoneIsValid(phone.text.toString())) {
                 phone.error = "رقم الهاتف ليس صالحا"
-            }
-            else if(!passwordIsValid(password.text.toString())){
+            } else if (!passwordIsValid(password.text.toString())) {
                 password.error = "كلمة السر ليست صالحة"
             }
         }
 
+        viewModel.numberStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
+                NumberStatus.LOADING -> {
+                    binding.submitAccountBtn.visibility = View.INVISIBLE
+                }
+                NumberStatus.AVAILABLE -> {
+                    binding.submitAccountBtn.visibility = View.VISIBLE
+                    viewModel.signUp(User(phone = phone.text.toString().trim()))
+                }
+                NumberStatus.NOT_AVAILABLE -> {
+                    binding.submitAccountBtn.visibility = View.VISIBLE
+                    Toast.makeText(
+                        requireContext(),
+                        "هذا الحساب مسجل لدينا بالفعل!\n جرب تسجيل الدخول",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                NumberStatus.ERROR -> {
+                    binding.submitAccountBtn.visibility = View.VISIBLE
+                    Toast.makeText(
+                        requireContext(),
+                        "حصل خطأ أثناء تسجيل الحساب ...حاول في وقت أخر",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
+            signedInUser = user
+        })
+
+        viewModel.registrationStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
+                RegistrationStatus.LOADING -> {
+                    binding.submitAccountBtn.visibility = View.INVISIBLE
+                }
+                RegistrationStatus.DONE -> {
+                    binding.submitAccountBtn.visibility = View.VISIBLE
+                    StoredAuthUser.setUser(requireContext(), phone.text.toString().trim())
+                    goToNextScreen()
+                }
+                RegistrationStatus.ERROR -> {
+                    binding.submitAccountBtn.visibility = View.VISIBLE
+                    Toast.makeText(
+                        requireContext(),
+                        "حصل خطأ أثناء تسجيل الحساب ...حاول في وقت أخر",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
 
         binding.registerManImage.setOnClickListener {
             selectGender("man", selectedGender, it, binding.registerWomanImage)
@@ -73,8 +130,25 @@ class RegisterationFragment : Fragment() {
             binding.whoAreYou.visibility = View.GONE
         }
 
-
         return root
+    }
+
+
+    private fun goToNextScreen() {
+        val bundle = bundleOf("gender" to selectedGender)
+        this.findNavController()
+            .navigate(R.id.action_registerationFragment_to_questionsFragment,
+                bundle,
+                navOptions {
+                    anim {
+                        enter = android.R.anim.slide_in_left
+                        exit = android.R.anim.slide_out_right
+                    }
+                })
+    }
+
+    private fun userNameIsValid(name: String): Boolean {
+        return name.isNotEmpty()
     }
 
     private fun passwordIsValid(password: String): Boolean {
@@ -154,7 +228,7 @@ class RegisterationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

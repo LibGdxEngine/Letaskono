@@ -14,11 +14,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
         <item name="android:windowAnimationStyle">@id/fade</item>
         <!-- Customize your theme here. -->
-<!--        <item name="android:statusBarColor">@color/colorPrimary</item>-->
-<!--        <item name="android:windowNoTitle">true</item>-->
-<!--        <item name="android:windowActionBar">false</item>-->
-<!--        <item name="android:windowFullscreen">true</item>-->
-<!--        <item name="android:windowContentOverlay">@null</item>-->
+        <!--        <item name="android:statusBarColor">@color/colorPrimary</item>-->
+        <!--        <item name="android:windowNoTitle">true</item>-->
+        <!--        <item name="android:windowActionBar">false</item>-->
+        <!--        <item name="android:windowFullscreen">true</item>-->
+        <!--        <item name="android:windowContentOverlay">@null</item>-->
     </style>
 
     <style name="MyToolbarTheme" parent="MaterialBaseTheme.Light.DarkToolbar">
@@ -112,9 +112,10 @@
         <item name="mrl_rippleHover">true</item>
         <item name="mrl_rippleAlpha">0.2</item>
     </style>
+
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
-        @null
-    </style>
+        @null</style>
+
     <style name="RippleStyleBlack" parent="RippleStyleWhite">
         <item name="mrl_rippleColor">#8096989A</item>
     </style>
@@ -284,4 +285,13 @@
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
     </style>
+
+    <style name="Theme.FirebaseMVVM.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FirebaseMVVM.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FirebaseMVVM.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

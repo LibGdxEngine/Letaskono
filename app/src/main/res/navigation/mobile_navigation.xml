@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_navigation_profile_to_registerationFragment"
             app:destination="@id/registerationFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/UsersDetailsFragment"
@@ -84,10 +87,14 @@
         android:id="@+id/questionsFragment"
         android:name="com.muslims.firebasemvvm.ui.main_questions_form.QuestionsFragment"
         android:label="fragment_questions_list"
-        tools:layout="@layout/fragment_questions_list" />
+        tools:layout="@layout/fragment_questions_list" >
+        <action
+            android:id="@+id/action_questionsFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
     <fragment
         android:id="@+id/registerationFragment"
-        android:name="com.muslims.firebasemvvm.ui.login_registeration.ui.register.RegisterationFragment"
+        android:name="com.muslims.firebasemvvm.ui.login_registeration.ui.register.RegistrationFragment"
         android:label="registeration_fragment"
         tools:layout="@layout/registeration_fragment" >
         <action

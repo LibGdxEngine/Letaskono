@@ -12,6 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentProfileBinding
+import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
+import com.muslims.firebasemvvm.utils.AuthenticatedUser
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 class ProfileFragment : Fragment() {
 
@@ -32,25 +36,41 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val currentUser = StoredAuthUser.getUser(requireContext())
+        if (currentUser != null) {
+            val userInfoCompleted = StoredAuthUser.getUserInfoCompleted(requireContext())
+            if (!userInfoCompleted) {
+                //Account info is not completed, prompt the use to complete it
+                binding.signedInUserWithoutCompleteInfoContainer?.visibility = View.VISIBLE
+                binding.btnCompleteInfo?.setOnClickListener {
+                    goToQuestionsScreen()
+                }
+            } else {
+                binding.signedInUserContainesr?.visibility = View.VISIBLE
+            }
+        } else {
+            binding.noSignedInUserContainer?.visibility = View.VISIBLE
+        }
 
-        binding.termsOfUse.setOnClickListener{ showTermServicesDialog() }
+        binding.termsOfUse.setOnClickListener { showTermServicesDialog() }
 
         binding.btnCreateAccount.setOnClickListener {
-            this.findNavController().navigate(R.id.action_navigation_profile_to_registerationFragment,
-                null,
-                navOptions {
-                    anim{
-                        enter = android.R.anim.slide_in_left
-                        exit = android.R.anim.slide_out_right
-                    }
-                })
+            this.findNavController()
+                .navigate(R.id.action_navigation_profile_to_registerationFragment,
+                    null,
+                    navOptions {
+                        anim {
+                            enter = android.R.anim.slide_in_left
+                            exit = android.R.anim.slide_out_right
+                        }
+                    })
         }
 
         binding.btnGoToLogin.setOnClickListener {
             this.findNavController().navigate(R.id.action_navigation_profile_to_loginFragment,
                 null,
                 navOptions {
-                    anim{
+                    anim {
                         enter = android.R.anim.slide_in_left
                         exit = android.R.anim.slide_out_right
                     }
@@ -58,6 +78,19 @@ class ProfileFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun goToQuestionsScreen() {
+        this.findNavController()
+            .navigate(R.id.action_navigation_profile_to_questionsFragment,
+                null,
+                navOptions {
+                    anim {
+                        enter = android.R.anim.slide_in_left
+                        exit = android.R.anim.slide_out_right
+                    }
+                })
+
     }
 
     private fun showTermServicesDialog() {
@@ -84,4 +117,5 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

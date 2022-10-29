@@ -85,7 +85,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
             }
 
             if (radioGroupIsEmpty(radioGroup)) {
-                val question: Question = Question(
+                val question: ItemQuestion = ItemQuestion(
                     id = position.toString(),
                     questionText = item.question,
                     answers = item.answers
@@ -98,8 +98,10 @@ class QuestionsRvAdapter(private var mListener: Listener) :
             }
         }
 
+        inner class ItemQuestion(var id:String,var questionText:String, var answers:List<String>)
+
         private fun generateRadioButtons(
-            question: Question,
+            question: ItemQuestion,
             radioGroup: RadioGroup?,
             selectedAnswer: String?
         ) {

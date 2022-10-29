@@ -4,6 +4,9 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Question(var id: String = "",
-                    var questionText: String = "",
-                    var answers: List<String>) : Parcelable
+data class Question(
+    var id: String = "",
+    var questionText: String = "",
+    var answer: String = "",
+    var note:String? = ""
+) : Parcelable

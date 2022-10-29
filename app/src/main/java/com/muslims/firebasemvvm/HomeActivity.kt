@@ -8,11 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesomeBrand
 import com.mikepenz.materialdrawer.Drawer
@@ -22,16 +27,25 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import com.mikepenz.materialdrawer.model.SectionDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.muslims.firebasemvvm.databinding.DrawerLayoutBinding
+import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.services.UsersServices
+import com.muslims.firebasemvvm.ui.users_applications_home.FireStoreStatus
+import com.muslims.firebasemvvm.ui.users_applications_home.HomeViewModel
+import com.muslims.firebasemvvm.utils.AuthenticatedUser
 import com.muslims.firebasemvvm.utils.DrawerLocker
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 
 class HomeActivity : AppCompatActivity(), DrawerLocker {
 
     private lateinit var binding: DrawerLayoutBinding
     private lateinit var navView: BottomNavigationView
+    private lateinit var homeActivityViewModel: HomeActivityViewModel
+    private lateinit var observer: Observer<User>
     var filterDrawer: View? = null
     var mainDrawer: Drawer? = null
     var currentFragment = R.id.navigation_home
+    var signedInUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +54,37 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
         binding.includedHome.toolbar.setTitle(R.string.app_name)
         setSupportActionBar(binding.includedHome.toolbar)
+        homeActivityViewModel =
+            ViewModelProvider(this).get(HomeActivityViewModel::class.java)
 
+//        observer = Observer<User> { user ->
+//            signedInUser = user
+//        }
+
+        val user = StoredAuthUser.getUser(applicationContext)
+        if(user != null){
+            homeActivityViewModel.getSignedInUser(user)
+        }
+
+
+//        homeActivityViewModel.user.observe(this, observer)
+
+        homeActivityViewModel.status.observe(this, Observer { status ->
+            when (status) {
+                AuthenticationStatus.LOADING -> {
+
+                }
+                AuthenticationStatus.DONE -> {
+
+                }
+                AuthenticationStatus.ERROR -> {
+
+                }
+            }
+        })
 
         navView = binding.includedHome.navView
+
 
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         // Passing each menu ID as a set of Ids because each
@@ -188,5 +230,6 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
             }
             .show()
     }
+
 
 }
