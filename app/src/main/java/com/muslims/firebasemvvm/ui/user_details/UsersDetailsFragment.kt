@@ -54,6 +54,7 @@ class UsersDetailsFragment : Fragment() {
         var userStatus: Question? = null
         var userHijab: Question? = null
         if (signedInUser?.gender == "man") {
+            binding.profileBackground.setImageResource(R.drawable.man_background)
             if (signedInUser.questionsList?.first { it.id == "23" }?.answer == "نعم") {
                 binding.image.setImageResource(R.drawable.man_with_lehya)
             } else {
@@ -65,6 +66,7 @@ class UsersDetailsFragment : Fragment() {
             userSmoking = signedInUser?.questionsList?.first { it.id == "21" }
             userStatus = signedInUser?.questionsList?.first { it.id == "19" }
         } else {
+            binding.profileBackground.setImageResource(R.drawable.woman_background)
             when (signedInUser?.questionsList?.first { it.id == "24" }?.answer) {
                 "منتقبة" -> {
                     binding.image.setImageResource(R.drawable.women_with_neqab)
@@ -104,6 +106,7 @@ class UsersDetailsFragment : Fragment() {
 
 
         binding.title?.text = title
+        binding.content?.userCode?.text = "كود: " + signedInUser?.id
         binding.age?.text = "${userAge?.answer}"
 
         //General Info

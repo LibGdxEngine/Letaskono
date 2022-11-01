@@ -123,6 +123,7 @@ class ProfileFragment : Fragment() {
         var userStatus: Question? = null
         var userHijab: Question? = null
         if (signedInUser?.gender == "man") {
+            binding.profileBackground?.setImageResource(R.drawable.man_background)
             if (signedInUser.questionsList?.first { it.id == "23" }?.answer == "نعم") {
                 binding.image?.setImageResource(R.drawable.man_with_lehya)
             } else {
@@ -134,6 +135,7 @@ class ProfileFragment : Fragment() {
             userSmoking = signedInUser?.questionsList?.first { it.id == "21" }
             userStatus = signedInUser?.questionsList?.first { it.id == "19" }
         } else {
+            binding.profileBackground?.setImageResource(R.drawable.woman_background)
             when (signedInUser?.questionsList?.first { it.id == "24" }?.answer) {
                 "منتقبة" -> {
                     binding.image?.setImageResource(R.drawable.women_with_neqab)
@@ -173,6 +175,7 @@ class ProfileFragment : Fragment() {
 
 
         binding.title?.text = title
+        binding.content?.userCode?.text = "كود: " + signedInUser?.id
         binding.age?.text = "${userAge?.answer}"
 
         //General Info
@@ -253,7 +256,7 @@ class ProfileFragment : Fragment() {
                 "هل أنت ملتحي؟: " + "${userLe7ya?.answer}" +
                         " " +
                         if (userLe7ya?.note.isNullOrEmpty()) "" else "(${userLe7ya?.note})"
-        }else{
+        } else {
             binding.content?.le7ya?.text =
                 "نوع الحجاب: " + "${userHijab?.answer}" +
                         " " +

@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
@@ -25,6 +27,8 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:visibility="visible"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +38,8 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_height"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl"
             android:fitsSystemWindows="true"
             android:theme="@style/Theme.FirebaseMVVM.AppBarOverlay">
 
@@ -43,6 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|noScroll"
                 app:toolbarId="@+id/toolbar">
@@ -52,11 +60,13 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/profileBackground"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/profile_background3"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"
+                        android:src="@drawable/man_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -68,25 +78,29 @@
                         android:id="@+id/age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
                         android:text="28"
                         android:textAlignment="center"
+                        android:textDirection="rtl"
                         android:textSize="32sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView"
-                        app:layout_constraintHorizontal_bias="0.275"
+                        app:layout_constraintEnd_toEndOf="@+id/profileBackground"
+                        app:layout_constraintHorizontal_bias="0.72"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/profileBackground"
                         app:layout_constraintVertical_bias="0.68" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
                         android:text="سنة"
                         android:textAlignment="center"
+                        android:textDirection="rtl"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView"
-                        app:layout_constraintHorizontal_bias="0.28"
+                        app:layout_constraintEnd_toEndOf="@+id/profileBackground"
+                        app:layout_constraintHorizontal_bias="0.72"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/age"
                         app:layout_constraintVertical_bias="0.0" />
@@ -99,14 +113,16 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+                        android:layoutDirection="rtl"
                         android:text="عريس ملتحي"
                         android:textColor="@color/grey_800"
+                        android:textDirection="rtl"
                         android:textSize="32sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView"
-                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintEnd_toEndOf="@+id/profileBackground"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/profileBackground"
                         app:layout_constraintVertical_bias="0.719" />
 
 
