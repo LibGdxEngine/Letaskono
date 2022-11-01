@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
+    var id: String = "",
     var name: String = "Mohammed",
     var gender:String = "",
     var questionsList: List<Question>? = null,

@@ -20,6 +20,8 @@ class QuestionsRvAdapter(private var mListener: Listener) :
 
     private val adapterData = mutableListOf<QuestionDataModel>()
 
+    private val itemIsRecyclable = false
+
     interface Listener {
         fun onNextButtonClicked()
         fun onBackButtonClicked()
@@ -71,7 +73,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
     inner class DataAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var questionText: TextView? = null
         private fun bindMCQ(item: QuestionDataModel.MCQ) {
-            setIsRecyclable(true)
+            setIsRecyclable(itemIsRecyclable)
             val radioGroup = itemView.findViewById<RadioGroup>(R.id.answersRadioGroup)
             val nextButton = itemView.findViewById<Button>(R.id.nextBtn).apply {
                 setOnClickListener {
@@ -85,12 +87,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
             }
 
             if (radioGroupIsEmpty(radioGroup)) {
-                val question: ItemQuestion = ItemQuestion(
-                    id = position.toString(),
-                    questionText = item.question,
-                    answers = item.answers
-                )
-                generateRadioButtons(question, radioGroup, item.selectedAnswer)
+                generateRadioButtons(item, radioGroup)
             }
 
             questionText = itemView.findViewById<TextView>(R.id.question_text).apply {
@@ -98,12 +95,9 @@ class QuestionsRvAdapter(private var mListener: Listener) :
             }
         }
 
-        inner class ItemQuestion(var id:String,var questionText:String, var answers:List<String>)
-
         private fun generateRadioButtons(
-            question: ItemQuestion,
-            radioGroup: RadioGroup?,
-            selectedAnswer: String?
+            question: QuestionDataModel.MCQ,
+            radioGroup: RadioGroup?
         ) {
             for (i in 1..question.answers.size) {
                 val radioButton =
@@ -111,7 +105,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
                         radioGroup!!.context,
                         i,
                         question.answers[i - 1],
-                        selectedAnswer
+                        question.selectedAnswer
                     )
 
                 radioGroup.apply {
@@ -130,7 +124,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
             val radio = RadioButton(context).apply {
                 layoutDirection = LayoutDirection.RTL
                 id = i
-                text = answer.toString()
+                text = answer
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     140
@@ -163,7 +157,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
         }
 
         private fun bindTextInput(item: QuestionDataModel.TextInput) {
-            setIsRecyclable(false)
+            setIsRecyclable(itemIsRecyclable)
             val answerTextInput = itemView.findViewById<EditText>(R.id.answerTextInput)
             val noteTextInput = itemView.findViewById<EditText>(R.id.noteTextInput)
             val nextButton = itemView.findViewById<Button>(R.id.nextBtn).apply {
@@ -243,6 +237,7 @@ class QuestionsRvAdapter(private var mListener: Listener) :
         }
 
         private fun bindNumericInput(item: QuestionDataModel.NumericInput) {
+            setIsRecyclable(itemIsRecyclable)
             val answerTextInput = itemView.findViewById<EditText>(R.id.answerTextInput)
             val noteTextInput = itemView.findViewById<EditText>(R.id.noteTextInput)
             setIsRecyclable(false)

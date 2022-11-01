@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/signedInUserWithoutCompleteInfoContainer"
         android:layout_width="match_parent"
@@ -81,7 +88,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_scrollFlags="scroll|noScroll"
                 app:toolbarId="@+id/toolbar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,7 +167,7 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_scrolling" />
+        <include android:id="@+id/content" layout="@layout/content_scrolling" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/image"

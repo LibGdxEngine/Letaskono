@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
+import com.google.android.material.textfield.TextInputEditText
 import com.muslims.firebasemvvm.HomeActivity
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.RegisterationFragmentBinding
@@ -34,7 +35,7 @@ class RegistrationFragment : Fragment() {
     private val binding get() = _binding!!
     private var selectedGender: String? = null
     var signedInUser: User? = null
-
+    lateinit var phone: TextInputEditText
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +48,8 @@ class RegistrationFragment : Fragment() {
         showTapTarget()
 
         val userName = binding.username
-        val phone = binding.phoneNumber
+
+        phone = binding.phoneNumber
         val password = binding.password
 
         binding.submitAccountBtn.setOnClickListener {
@@ -72,7 +74,13 @@ class RegistrationFragment : Fragment() {
                 }
                 NumberStatus.AVAILABLE -> {
                     binding.submitAccountBtn.visibility = View.VISIBLE
-                    viewModel.signUp(User(phone = phone.text.toString().trim()))
+                    viewModel.signUp(
+                        User(
+                            phone = phone.text.toString().trim(),
+                            gender = selectedGender!!,
+                            password = password.text.toString().trim()
+                        )
+                    )
                 }
                 NumberStatus.NOT_AVAILABLE -> {
                     binding.submitAccountBtn.visibility = View.VISIBLE
@@ -135,7 +143,7 @@ class RegistrationFragment : Fragment() {
 
 
     private fun goToNextScreen() {
-        val bundle = bundleOf("gender" to selectedGender)
+        val bundle = bundleOf("gender" to selectedGender, "phone" to phone.text.toString().trim())
         this.findNavController()
             .navigate(R.id.action_registerationFragment_to_questionsFragment,
                 bundle,

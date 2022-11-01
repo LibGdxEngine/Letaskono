@@ -1,7 +1,11 @@
 package com.muslims.firebasemvvm.ui.main_questions_form.Questions
 
+import com.google.android.material.textfield.TextInputEditText
+
+
 import com.muslims.firebasemvvm.models.Question
 import com.muslims.firebasemvvm.models.QuestionDataModel
+import kotlinx.coroutines.flow.merge
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -14,12 +18,16 @@ object QuestionsContent {
     private val TAG = this.javaClass.canonicalName
 
     fun items(type: String): MutableList<QuestionDataModel> {
-        if (type == "man") {
-            return MAN_QUESTIONS
+        val joined = ArrayList<QuestionDataModel>()
+        return if (type == "man") {
+            joined.addAll(Questions)
+            joined.addAll(MAN_QUESTIONS)
+            joined
         } else {
-            WOMAN_QUESTIONS
+            joined.addAll(Questions)
+            joined.addAll(WOMAN_QUESTIONS)
+            joined
         }
-        return Questions
     }
 
     private var Questions = mutableListOf(
@@ -51,7 +59,7 @@ object QuestionsContent {
             question = "ما هي المواصفات التي تريدها في شريك/ـة حياتك؟",
         ),
         QuestionDataModel.NumericInput(
-            id = "5",
+            id = "26",
             question = "ما هو طولك؟",
         ),
         QuestionDataModel.NumericInput(
@@ -97,7 +105,7 @@ object QuestionsContent {
         QuestionDataModel.MCQ(
             id = "16",
             question = "هل تشاهد/ـي الأفلام او تستمع/ـين إلى الموسيقى أو الأغاني ؟",
-            answers = listOf("لا أبدا", "نعم كثيرا", "نادرا")
+            answers = listOf("لا", "نعم كثيرا", "نادرا")
         ),
         QuestionDataModel.TextInput(
             id = "17",
@@ -107,13 +115,17 @@ object QuestionsContent {
             id = "18",
             question = "من مرسل الاستمارة ،أنت أم أحد معارفك؟",
         ),
+        QuestionDataModel.TextInput(
+            id = "25",
+            question = "هل لديك أولاد وما عددهم؟"
+        )
     )
 
     private var MAN_QUESTIONS = mutableListOf<QuestionDataModel>(
         QuestionDataModel.MCQ(
-            id = "19",
-            question = "الحالة الإجتماعية",
-            answers = listOf("متزوج", "أرمل", "مطلق", "أعزب")
+            id = "23",
+            question = "هل أنت ملتحي؟",
+            answers = listOf("نعم", "لحية خفيفة", "لا")
         ),
         QuestionDataModel.TextInput(
             id = "20",
@@ -123,20 +135,25 @@ object QuestionsContent {
             id = "21",
             question = "هل أنت مدخن؟",
         ),
+        QuestionDataModel.MCQ(
+            id = "19",
+            question = "ما هي حالتك الإجتماعية؟",
+            answers = listOf("متزوج", "أرمل", "مطلق", "أعزب")
+        ),
     )
 
 
     private var WOMAN_QUESTIONS = mutableListOf<QuestionDataModel>(
+        QuestionDataModel.MCQ(
+            id = "24",
+            question = "ما هو شكل حجابك؟",
+            answers = listOf("منتقبة", "مختمرة", "طرح وفساتين", "طرح وبناطيل", "سافرة")
+        ),
         QuestionDataModel.MCQ(
             id = "22",
             question = "الحالة الإجتماعية",
             answers = listOf("عزباء", "أرملة", "مطلقة")
         ),
     )
-
-    init {
-        MAN_QUESTIONS.addAll(0, Questions)
-        WOMAN_QUESTIONS.addAll(0, Questions)
-    }
 
 }

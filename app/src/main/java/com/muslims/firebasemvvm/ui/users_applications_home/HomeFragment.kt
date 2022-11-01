@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.swipToRefreshLayout.setOnRefreshListener {
-            Toast.makeText(requireContext(), "${getAuthUser().phone}", Toast.LENGTH_SHORT).show()
             homeViewModel.getAllUsers()
             binding.swipToRefreshLayout.isRefreshing = false
         }
@@ -84,9 +83,6 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    fun getAuthUser(): User{
-        return (activity as AuthenticatedUser).getAuthUser()!!
-    }
 
     private fun onUserRvItemClicked(user:User) {
         var userBundle = bundleOf("user" to user)

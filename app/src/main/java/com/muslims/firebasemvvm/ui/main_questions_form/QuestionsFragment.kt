@@ -36,7 +36,9 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
     private var mToast: Toast? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var selectedGender: String
+    private lateinit var phoneNumber: String
     private var currentUser: User? = null
+    private var questionsList: MutableList<QuestionDataModel>? = null
     private val questionsRvAdapter: QuestionsRvAdapter by lazy {
         QuestionsRvAdapter(this@QuestionsFragment)
     }
@@ -63,6 +65,10 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
         disableDrawer()
 
         selectedGender = arguments?.getString("gender").toString()
+        phoneNumber = arguments?.getString("phone").toString()
+
+        questionsList = QuestionsContent.items(selectedGender)
+
         recyclerView = binding.list
 
         _binding!!.textViewLogo.setCharacterDelay(150)
@@ -99,7 +105,6 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                 }
                 AuthenticationStatus.DONE -> {
                     val questionsList = mutableListOf<Question>()
-                    val data: Map<String, Any> = HashMap()
                     for (item in QuestionsContent.items(selectedGender)) {
                         var id: String? = null
                         var question: String? = null
@@ -172,8 +177,8 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
     }
 
     override fun onNextButtonClicked() {
-        if (currentQuestionIndex < QuestionsContent.items(selectedGender).size - 1) {//max number of questions
-            val item = QuestionsContent.items(selectedGender)[currentQuestionIndex]
+        if (currentQuestionIndex < questionsList?.size!! - 1) {//max number of questions
+            val item = questionsList!![currentQuestionIndex]
             if (submittedAnswerIsValid(item)) {
                 recyclerView.scrollToPosition(++currentQuestionIndex)
             } else {
@@ -181,15 +186,9 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                 mToast = Toast.makeText(context, "هذا السؤال ليس اختياريا!", Toast.LENGTH_LONG);
                 mToast?.show();
             }
-
-
         } else {
             //finish questions and go to other page
-            val userId = StoredAuthUser.getUser(requireContext())
-            viewModel.getSignedInUser(userId)
-            if (mToast != null) mToast?.cancel();
-            mToast = Toast.makeText(context, "GO ${userId}", Toast.LENGTH_LONG);
-            mToast?.show();
+            viewModel.getSignedInUser(phoneNumber)
         }
     }
 
