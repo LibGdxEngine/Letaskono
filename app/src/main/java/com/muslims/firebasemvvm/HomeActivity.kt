@@ -15,9 +15,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesomeBrand
 import com.mikepenz.materialdrawer.Drawer
@@ -28,10 +25,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.muslims.firebasemvvm.databinding.DrawerLayoutBinding
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.services.UsersServices
-import com.muslims.firebasemvvm.ui.users_applications_home.FireStoreStatus
-import com.muslims.firebasemvvm.ui.users_applications_home.HomeViewModel
-import com.muslims.firebasemvvm.utils.AuthenticatedUser
 import com.muslims.firebasemvvm.utils.DrawerLocker
 import com.muslims.firebasemvvm.utils.StoredAuthUser
 
@@ -57,9 +50,6 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
         homeActivityViewModel =
             ViewModelProvider(this).get(HomeActivityViewModel::class.java)
 
-//        observer = Observer<User> { user ->
-//            signedInUser = user
-//        }
 
         val user = StoredAuthUser.getUser(applicationContext)
         if(user != null){
@@ -67,7 +57,6 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
         }
 
 
-//        homeActivityViewModel.user.observe(this, observer)
 
         homeActivityViewModel.status.observe(this, Observer { status ->
             when (status) {

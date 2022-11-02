@@ -23,7 +23,6 @@ class HomeViewModel : ViewModel() {
     init {
         if(_users.value == null){
             getAllUsers()
-            Log.d("TAG" , "is null")
         }
     }
 

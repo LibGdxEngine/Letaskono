@@ -3,49 +3,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_10"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_lyt"
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favouritesListContainer"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favouritesList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
 
-            <ImageView
-                android:id="@+id/bg_image"
-                android:layout_width="match_parent"
-                android:layout_height="380dp"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/bg_no_item_cactus" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/coordinator_lyt"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/bg_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.5"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/bg_no_item_cactus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bg_image"
+            app:layout_constraintVertical_bias="0.13999999">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/spacing_xxlarge"
+                android:layout_margin="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:lineSpacingExtra="@dimen/spacing_middle"
+                android:text="ليس لديك أي استمارات محفوظة \n تأكد من تسجيل حسابك أولا قبل حفظ أي استمارات"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/blue_grey_900" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_medium"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:gravity="center"
-                    android:lineSpacingExtra="@dimen/spacing_middle"
-                    android:text="ليس لديك أي استمارات محفوظة \n تأكد من تسجيل حسابك أولا قبل حفظ أي استمارات"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_60" />
-            </LinearLayout>
 
-        </RelativeLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

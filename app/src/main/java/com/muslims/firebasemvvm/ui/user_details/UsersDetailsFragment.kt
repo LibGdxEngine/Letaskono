@@ -6,11 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
+import com.muslims.firebasemvvm.AuthenticationStatus
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.DetailsFragmentBinding
 import com.muslims.firebasemvvm.models.Question
 import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 class UsersDetailsFragment : Fragment() {
 
@@ -22,6 +26,8 @@ class UsersDetailsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    var userAlreadyInFavourites = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +37,19 @@ class UsersDetailsFragment : Fragment() {
         viewModelUsers = ViewModelProvider(this).get(UsersDetailsViewModel::class.java)
 
         val user = arguments?.getParcelable<User>("user")
+        val signedInUser = arguments?.getParcelable<User>("signedInUser")
+
+        val favouritesList = user?.favourites?.split(",")
+
+        if (favouritesList != null) {
+            if (favouritesList.contains(user.id)) {
+                binding.favourite.setImageResource(R.drawable.ic_baseline_bookmark_added_24)
+                userAlreadyInFavourites = true
+            } else {
+                binding.favourite.setImageResource(R.drawable.ic_outline_bookmark_add_24)
+                userAlreadyInFavourites = false
+            }
+        }
 
         binding.progressBar?.visibility = View.GONE
         binding.signedInUserContainesr?.visibility = View.VISIBLE
@@ -43,7 +62,58 @@ class UsersDetailsFragment : Fragment() {
         })
         bindUserInfo(user)
 
-        return  root
+
+        viewModelUsers.removingStatus.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                UpdatingStatus.LOADING -> {
+
+                }
+                UpdatingStatus.ERROR -> {
+
+                }
+                UpdatingStatus.DONE -> {
+                    binding.favourite.setImageResource(R.drawable.ic_outline_bookmark_add_24)
+                    userAlreadyInFavourites = false
+                }
+            }
+        })
+
+        viewModelUsers.status.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                UpdatingStatus.LOADING -> {
+
+                }
+                UpdatingStatus.ERROR -> {
+
+                }
+                UpdatingStatus.DONE -> {
+                    binding.favourite.setImageResource(R.drawable.ic_baseline_bookmark_added_24)
+                    userAlreadyInFavourites = true
+                }
+            }
+        })
+
+        binding.favourite.setOnClickListener {
+            if (signedInUser != null) {
+                if (userAlreadyInFavourites) {
+                    viewModelUsers.removeFromFavourite(
+                        signedInUser,
+                        user?.id!!
+                    )
+                } else {
+                    viewModelUsers.addUserToFavourites(
+                        signedInUser,
+                        user?.id!!
+                    )
+                }
+            }
+        }
+
+        binding.share.setOnClickListener {
+
+        }
+
+        return root
     }
 
     private fun bindUserInfo(signedInUser: User?) {
@@ -187,7 +257,7 @@ class UsersDetailsFragment : Fragment() {
                 "هل أنت ملتحي؟: " + "${userLe7ya?.answer}" +
                         " " +
                         if (userLe7ya?.note.isNullOrEmpty()) "" else "(${userLe7ya?.note})"
-        }else{
+        } else {
             binding.content?.le7ya?.text =
                 "نوع الحجاب: " + "${userHijab?.answer}" +
                         " " +

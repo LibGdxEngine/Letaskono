@@ -17,10 +17,10 @@ class ProfileViewModel : ViewModel() {
     private val _getUserStatus = MutableLiveData<AuthenticationStatus>()
     val getUserStatus: LiveData<AuthenticationStatus> = _getUserStatus
 
-    fun getSignedInUser(phone: String) {
+    fun getSignedInUser(userId: String) {
         viewModelScope.launch {
             _getUserStatus.value = AuthenticationStatus.LOADING
-            val currentUser = UsersServices.getUserByPhoneNumber(phone)
+            val currentUser = UsersServices.getUserById(userId)
             if (currentUser != null) {
                 _user.value = currentUser
                 _getUserStatus.value = AuthenticationStatus.DONE

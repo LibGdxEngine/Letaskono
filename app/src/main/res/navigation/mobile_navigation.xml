@@ -50,6 +50,11 @@
         <argument
             android:name="user"
             app:argType="com.muslims.firebasemvvm.models.User" />
+        <argument
+            android:name="signedInUser"
+            app:argType="com.muslims.firebasemvvm.models.User"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/savedApplicationsFragment"
@@ -59,6 +64,9 @@
         <action
             android:id="@+id/action_savedApplicationsFragment_to_navigation_home3"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_savedApplicationsFragment_to_UsersDetailsFragment"
+            app:destination="@id/UsersDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/welcomeToAppStepperFragment"

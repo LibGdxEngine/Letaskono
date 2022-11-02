@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentHomeBinding
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.utils.AuthenticatedUser
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 
 class HomeFragment : Fragment() {
@@ -28,13 +28,14 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var signedInUser: User? = null
 
     private lateinit var observer: Observer<List<User>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         usersRvAdapter = UsersRvAdapter(listOf(), UsersRvAdapter.Listener { user ->
-            onUserRvItemClicked(user)
+            onUserRvItemClicked(user, signedInUser)
         })
     }
 
@@ -59,7 +60,12 @@ class HomeFragment : Fragment() {
             adapter = usersRvAdapter
         }
 
+        val currentUserId = StoredAuthUser.getUser(requireContext())
+
         observer = Observer<List<User>> { usersList ->
+            if (!currentUserId.isNullOrEmpty()) {
+                signedInUser = usersList.first { it.id == currentUserId }
+            }
             usersRvAdapter.users = usersList
             usersRvAdapter.notifyDataSetChanged()
         }
@@ -84,8 +90,8 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun onUserRvItemClicked(user: User) {
-        var userBundle = bundleOf("user" to user)
+    private fun onUserRvItemClicked(clickedUser: User, signedInUser: User?) {
+        var userBundle = bundleOf("user" to clickedUser, "signedInUser" to signedInUser)
         this.findNavController().currentDestination?.getAction(R.id.action_navigation_home_to_detailsFragment)
             ?.let {
                 this.findNavController().navigate(R.id.action_navigation_home_to_detailsFragment,

@@ -10,15 +10,16 @@ import kotlinx.parcelize.Parcelize
 data class User(
     var id: String = "",
     var name: String = "Mohammed",
-    var gender:String = "",
+    var gender: String = "",
     var questionsList: List<Question>? = null,
     var password: String = "",
     var phone: String = "",
+    var favourites: String? = "",
     @field:JvmField
     var isBlocked: Boolean = false,
     val profileCreationDate: String = Timestamp.now().toDate().toString(),
     val lastProfileUpdate: String = Timestamp.now().toDate().toString(),
-) : Parcelable{
+) : Parcelable {
 
     override fun toString(): String {
         return "عريس 25 سنة"

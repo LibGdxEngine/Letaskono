@@ -16,12 +16,9 @@ import androidx.navigation.navOptions
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.google.android.material.textfield.TextInputEditText
-import com.muslims.firebasemvvm.HomeActivity
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.RegisterationFragmentBinding
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
-import com.muslims.firebasemvvm.utils.AuthenticatedUser
 import com.muslims.firebasemvvm.utils.StoredAuthUser
 import kotlin.random.Random
 
@@ -37,6 +34,8 @@ class RegistrationFragment : Fragment() {
     private var selectedGender: String? = null
     var signedInUser: User? = null
     lateinit var phone: TextInputEditText
+    var userGeneratedId: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,13 +44,14 @@ class RegistrationFragment : Fragment() {
             ViewModelProvider(this).get(RegistrationViewModel::class.java)
         _binding = RegisterationFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        userGeneratedId = Random(2000).nextInt(from = 0, until = 1000000).toString()
         showTapTarget()
 
         val userName = binding.username
 
         phone = binding.phoneNumber
         val password = binding.password
+
 
         binding.submitAccountBtn.setOnClickListener {
             if (userNameIsValid(userName.text.toString().trim()) and phoneIsValid(
@@ -74,10 +74,11 @@ class RegistrationFragment : Fragment() {
                     binding.submitAccountBtn.visibility = View.INVISIBLE
                 }
                 NumberStatus.AVAILABLE -> {
+
                     binding.submitAccountBtn.visibility = View.VISIBLE
                     viewModel.signUp(
                         User(
-                            id= Random(2000).nextLong().toString(),
+                            id = userGeneratedId!!,
                             phone = phone.text.toString().trim(),
                             gender = selectedGender!!,
                             password = password.text.toString().trim()
@@ -114,7 +115,7 @@ class RegistrationFragment : Fragment() {
                 }
                 RegistrationStatus.DONE -> {
                     binding.submitAccountBtn.visibility = View.VISIBLE
-                    StoredAuthUser.setUser(requireContext(), phone.text.toString().trim())
+                    StoredAuthUser.setUser(requireContext(), userGeneratedId)
                     goToNextScreen()
                 }
                 RegistrationStatus.ERROR -> {
