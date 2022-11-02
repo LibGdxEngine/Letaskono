@@ -18,5 +18,10 @@ data class User(
     var isBlocked: Boolean = false,
     val profileCreationDate: String = Timestamp.now().toDate().toString(),
     val lastProfileUpdate: String = Timestamp.now().toDate().toString(),
-) : Parcelable
+) : Parcelable{
+
+    override fun toString(): String {
+        return "عريس 25 سنة"
+    }
+}
 

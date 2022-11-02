@@ -18,19 +18,15 @@ object QuestionsContent {
     private val TAG = this.javaClass.canonicalName
 
     fun items(type: String): MutableList<QuestionDataModel> {
-        val joined = ArrayList<QuestionDataModel>()
         return if (type == "man") {
-            joined.addAll(Questions)
-            joined.addAll(MAN_QUESTIONS)
-            joined
+            MAN_QUESTIONS
         } else {
-            joined.addAll(Questions)
-            joined.addAll(WOMAN_QUESTIONS)
-            joined
+            WOMAN_QUESTIONS
         }
     }
 
-    private var Questions = mutableListOf(
+
+    private var MAN_QUESTIONS = mutableListOf<QuestionDataModel>(
         QuestionDataModel.MCQ(
             id = "1",
             question = "ما مدى التزامك بالصلاة ؟",
@@ -42,6 +38,7 @@ object QuestionsContent {
                 "لا أصلي والعياذ بالله",
             )
         ),
+
         QuestionDataModel.NumericInput(
             id = "2",
             question = "ما هو سنك؟",
@@ -52,11 +49,11 @@ object QuestionsContent {
         ),
         QuestionDataModel.TextInput(
             id = "4",
-            question = "تكلم/ـي عن نفسك (أو ما يقوله الناس عنك)",
+            question = "تكلم عن نفسك (أو ما يقوله الناس عنك)",
         ),
         QuestionDataModel.TextInput(
             id = "5",
-            question = "ما هي المواصفات التي تريدها في شريك/ـة حياتك؟",
+            question = "ما هي المواصفات التي تريدها في شريكـة حياتك؟",
         ),
         QuestionDataModel.NumericInput(
             id = "26",
@@ -84,7 +81,7 @@ object QuestionsContent {
         ),
         QuestionDataModel.TextInput(
             id = "11",
-            question = "إلى أي محافظة تنتمي/ـين في الأصل؟ وأين تعيش/ـين حاليا؟",
+            question = "إلى أي محافظة تنتمي في الأصل؟ وأين تعيش حاليا؟",
         ),
         QuestionDataModel.TextInput(
             id = "12",
@@ -104,7 +101,7 @@ object QuestionsContent {
         ),
         QuestionDataModel.MCQ(
             id = "16",
-            question = "هل تشاهد/ـي الأفلام او تستمع/ـين إلى الموسيقى أو الأغاني ؟",
+            question = "هل تشاهد الأفلام او تستمع إلى الموسيقى أو الأغاني ؟",
             answers = listOf("لا", "نعم كثيرا", "نادرا")
         ),
         QuestionDataModel.TextInput(
@@ -118,10 +115,7 @@ object QuestionsContent {
         QuestionDataModel.TextInput(
             id = "25",
             question = "هل لديك أولاد وما عددهم؟"
-        )
-    )
-
-    private var MAN_QUESTIONS = mutableListOf<QuestionDataModel>(
+        ),
         QuestionDataModel.MCQ(
             id = "23",
             question = "هل أنت ملتحي؟",
@@ -145,9 +139,95 @@ object QuestionsContent {
 
     private var WOMAN_QUESTIONS = mutableListOf<QuestionDataModel>(
         QuestionDataModel.MCQ(
+            id = "1",
+            question = "ما مدى التزامك بالصلاة ؟",
+            answers = listOf(
+                "أصلي جميع الصلوات في المنزل في وقتها",
+                "متقطعة في الصلاة",
+                "لا أصلي والعياذ بالله",
+            )
+        ),
+        QuestionDataModel.NumericInput(
+            id = "2",
+            question = "ما هو سنك؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "3",
+            question = "ما هي جنسيتك؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "4",
+            question = "تكلمي عن نفسك (أو ما يقوله الناس عنك)",
+        ),
+        QuestionDataModel.TextInput(
+            id = "5",
+            question = "ما هي المواصفات التي تريدينها في شريك حياتك؟",
+        ),
+        QuestionDataModel.NumericInput(
+            id = "26",
+            question = "ما هو طولك؟",
+        ),
+        QuestionDataModel.NumericInput(
+            id = "6",
+            question = "ما هو وزنك؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "7",
+            question = "ما هو لون بشرتك؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "8",
+            question = "ما هو مؤهلك التعليمي؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "9",
+            question = "ما هي وظيفتك؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "10",
+            question = "هل تعانين من أي أمراض أو إعاقات؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "11",
+            question = "إلى أي محافظة تنتمين في الأصل؟ وأين تعيشين حاليا؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "12",
+            question = "ما هو عمل الوالد؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "13",
+            question = "ما هو عمل الوالدة؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "14",
+            question = "ما عدد الإخوة والأخوات وأعمارهم ومؤهلاتهم؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "15",
+            question = "ما مقدار حفظك للقران؟",
+        ),
+        QuestionDataModel.MCQ(
+            id = "16",
+            question = "هل تشاهدين الأفلام او تستمعين إلى الموسيقى أو الأغاني ؟",
+            answers = listOf("لا", "نعم كثيرا", "نادرا")
+        ),
+        QuestionDataModel.TextInput(
+            id = "17",
+            question = "هل لديك أي انتمائات دينية؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "18",
+            question = "من مرسل الاستمارة ،أنت أم أحد معارفك؟",
+        ),
+        QuestionDataModel.TextInput(
+            id = "25",
+            question = "هل لديك أولاد وما عددهم؟"
+        ),
+        QuestionDataModel.MCQ(
             id = "24",
             question = "ما هو شكل حجابك؟",
-            answers = listOf("منتقبة", "مختمرة", "طرح وفساتين", "طرح وبناطيل", "سافرة")
+            answers = listOf("منتقبة", "مختمرة", "طرح وفساتين", "طرح وبناطيل")
         ),
         QuestionDataModel.MCQ(
             id = "22",

@@ -26,6 +26,7 @@ class QuestionsFragmentViewModel : ViewModel() {
             try {
                 UsersServices.updateUser(user)
             } catch (e: Exception) {
+                println( "MyException" + e.message.toString())
                 _updatingStatus.value = UpdatingStatus.ERROR
             }
             _updatingStatus.value = UpdatingStatus.DONE

@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
+    var mToast: Toast? = null
     lateinit var usersRvAdapter: UsersRvAdapter
 
     // This property is only valid between onCreateView and
@@ -64,10 +64,10 @@ class HomeFragment : Fragment() {
             usersRvAdapter.notifyDataSetChanged()
         }
 
-        homeViewModel.users.observe(viewLifecycleOwner , observer)
+        homeViewModel.users.observe(viewLifecycleOwner, observer)
 
-        homeViewModel.status.observe(viewLifecycleOwner, Observer {status ->
-            when(status){
+        homeViewModel.status.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
                 FireStoreStatus.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
@@ -84,17 +84,21 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun onUserRvItemClicked(user:User) {
+    private fun onUserRvItemClicked(user: User) {
         var userBundle = bundleOf("user" to user)
-        this.findNavController().navigate(R.id.action_navigation_home_to_detailsFragment,
-            userBundle,
-            navOptions { // Use the Kotlin DSL for building NavOptions
-                anim {
-                    enter = android.R.anim.slide_in_left
-                    exit = android.R.anim.slide_out_right
-                }
+        this.findNavController().currentDestination?.getAction(R.id.action_navigation_home_to_detailsFragment)
+            ?.let {
+                this.findNavController().navigate(R.id.action_navigation_home_to_detailsFragment,
+                    userBundle,
+                    navOptions { // Use the Kotlin DSL for building NavOptions
+                        anim {
+                            enter = android.R.anim.slide_in_left
+                            exit = android.R.anim.slide_out_right
+                        }
+                    }
+                )
             }
-        )
+
     }
 
     override fun onDestroyView() {

@@ -69,6 +69,8 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
 
         questionsList = QuestionsContent.items(selectedGender)
 
+
+
         recyclerView = binding.list
 
         _binding!!.textViewLogo.setCharacterDelay(150)
@@ -101,11 +103,13 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
         viewModel.getUserStatus.observe(viewLifecycleOwner, Observer { status ->
             when (status) {
                 AuthenticationStatus.LOADING -> {
-
+                    if (mToast != null) mToast?.cancel();
+                    mToast = Toast.makeText(context, "LOADING", Toast.LENGTH_LONG);
+                    mToast?.show();
                 }
                 AuthenticationStatus.DONE -> {
-                    val questionsList = mutableListOf<Question>()
-                    for (item in QuestionsContent.items(selectedGender)) {
+                    val questions = mutableListOf<Question>()
+                    for (item in questionsList!!) {
                         var id: String? = null
                         var question: String? = null
                         var answer: String? = null
@@ -125,13 +129,15 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                             answer = item.answer
                             note = item.note
                         }
-                        questionsList.add(Question(id!!, question!!, answer!!, note))
+                        questions.add(Question(id!!, question!!, answer!!, note))
                     }
-                    currentUser?.questionsList = questionsList
+                    currentUser?.questionsList = questions
                     viewModel.updateUser(currentUser!!)
                 }
                 AuthenticationStatus.ERROR -> {
-
+                    if (mToast != null) mToast?.cancel();
+                    mToast = Toast.makeText(context, "ERROR", Toast.LENGTH_LONG);
+                    mToast?.show();
                 }
             }
         })
@@ -149,7 +155,9 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                     mToast?.show();
                 }
                 UpdatingStatus.ERROR -> {
-
+                    if (mToast != null) mToast?.cancel();
+                    mToast = Toast.makeText(context, "حصل خطأ ما...تواصل معنا لحله!", Toast.LENGTH_LONG);
+                    mToast?.show();
                 }
             }
         })

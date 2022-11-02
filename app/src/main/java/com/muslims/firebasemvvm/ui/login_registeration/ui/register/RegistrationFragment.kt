@@ -23,6 +23,7 @@ import com.muslims.firebasemvvm.models.User
 import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
 import com.muslims.firebasemvvm.utils.AuthenticatedUser
 import com.muslims.firebasemvvm.utils.StoredAuthUser
+import kotlin.random.Random
 
 
 class RegistrationFragment : Fragment() {
@@ -76,6 +77,7 @@ class RegistrationFragment : Fragment() {
                     binding.submitAccountBtn.visibility = View.VISIBLE
                     viewModel.signUp(
                         User(
+                            id= Random(2000).nextLong().toString(),
                             phone = phone.text.toString().trim(),
                             gender = selectedGender!!,
                             password = password.text.toString().trim()

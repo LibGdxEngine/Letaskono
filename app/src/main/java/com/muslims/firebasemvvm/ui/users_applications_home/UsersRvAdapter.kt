@@ -26,6 +26,8 @@ class UsersRvAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var mLastClickTime = System.currentTimeMillis();
+        val CLICK_TIME_INTERVAL = 1;
         val user = users.get(position)
         var name = ""
         var description = ""
@@ -75,6 +77,12 @@ class UsersRvAdapter(
                 " "
 
         holder.itemView.setOnClickListener {
+            val now = System.currentTimeMillis()
+            if (now - mLastClickTime < CLICK_TIME_INTERVAL) {
+                println("Can't click more!")
+                return@setOnClickListener
+            }
+            mLastClickTime = now
             listener.onClick(user)
         }
         setAnimation(holder.itemView, position)
