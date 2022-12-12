@@ -11,14 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirebaseMVVM">
         <activity
-            android:name=".ScrollingActivity"
-            android:exported="false"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/Theme.FirebaseMVVM.NoActionBar" />
+            android:name=".ui.why_marry.WhyMarryActivity"
+            android:exported="true"
+            android:label="@string/title_activity_why_marry"
+            android:theme="@style/Theme.MainTheme" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.MainTheme"></activity>
+            android:theme="@style/Theme.MainTheme" />
         <activity
             android:name=".HomeActivity"
             android:exported="true"

@@ -141,7 +141,7 @@
 
         <include
             android:id="@+id/content"
-            layout="@layout/content_scrolling" />
+            layout="@layout/profile_content" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/image"

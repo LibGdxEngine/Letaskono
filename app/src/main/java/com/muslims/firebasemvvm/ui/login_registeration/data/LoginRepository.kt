@@ -1,5 +1,6 @@
 package com.muslims.firebasemvvm.ui.login_registeration.data
 
+import com.muslims.firebasemvvm.models.User
 import com.muslims.firebasemvvm.ui.login_registeration.data.model.LoggedInUser
 
 /**
@@ -10,7 +11,7 @@ import com.muslims.firebasemvvm.ui.login_registeration.data.model.LoggedInUser
 class LoginRepository(val dataSource: LoginDataSource) {
 
     // in-memory cache of the loggedInUser object
-    var user: LoggedInUser? = null
+    var user: User? = null
         private set
 
     val isLoggedIn: Boolean
@@ -27,7 +28,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(username: String, password: String): Result<User> {
         // handle login
         val result = dataSource.login(username, password)
 
@@ -38,7 +39,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
+    private fun setLoggedInUser(loggedInUser: User) {
         this.user = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore

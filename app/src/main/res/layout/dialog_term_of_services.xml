@@ -101,6 +101,12 @@
         android:paddingRight="@dimen/spacing_mlarge"
         android:paddingTop="@dimen/spacing_middle">
 
+        <View
+            android:layout_width="@dimen/spacing_large"
+            android:layout_height="0dp" />
+
+
+
         <Button
             android:id="@+id/bt_accept"
             style="@style/Button.Primary.Borderless"
@@ -112,23 +118,6 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            app:fontFamily="serif" />
-
-        <View
-            android:layout_width="@dimen/spacing_large"
-            android:layout_height="0dp" />
-
-        <Button
-            android:id="@+id/bt_decline"
-            style="@style/Button.Primary.Borderless"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_rect_teal_outline"
-            android:text="رفض"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/teal_500"
             app:fontFamily="serif" />
 
     </LinearLayout>

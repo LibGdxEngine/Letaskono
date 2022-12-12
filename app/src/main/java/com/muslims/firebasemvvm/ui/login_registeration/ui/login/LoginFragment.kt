@@ -1,5 +1,8 @@
 package com.muslims.firebasemvvm.ui.login_registeration.ui.login
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.annotation.StringRes
@@ -12,9 +15,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentLoginBinding
+import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.ui.main_questions_form.Questions.QuestionsContent
+import com.muslims.firebasemvvm.utils.StoredAuthUser
 
 
 class LoginFragment : Fragment() {
@@ -39,10 +47,27 @@ class LoginFragment : Fragment() {
         textViewLogo.animateText(getString(R.string.app_name));
 
         binding.btnFromLoginToSignUp.setOnClickListener {
-            this.findNavController().navigate(R.id.welcomeToAppStepperFragment)
+            this.findNavController().navigate(R.id.action_loginFragment_to_registerationFragment)
         }
-        return binding.root
 
+        binding.forgotPassword.setOnClickListener {
+            setClickToChat(it, "+201019867911", "السلام عليكم ورحمة الله \n أريد استعادة كلمة السر الخاصة بي")
+        }
+
+        return binding.root
+    }
+
+    fun setClickToChat(v: View, toNumber: String, message: String) {
+        val url = "https://wa.me/$toNumber/?text=" + message
+        try {
+            val pm = v.context.packageManager
+            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            v.context.startActivity(i)
+        } catch (e: PackageManager.NameNotFoundException) {
+            v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +75,7 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
-        val usernameEditText = binding.email
+        val userPhoneEditText = binding.email
         val passwordEditText = binding.password
         val loginButton = binding.btnLogin
         val loadingProgressBar = binding.loginProgressBar
@@ -61,8 +86,8 @@ class LoginFragment : Fragment() {
                     return@Observer
                 }
                 loginButton.isEnabled = loginFormState.isDataValid
-                loginFormState.usernameError?.let {
-                    usernameEditText.error = getString(it)
+                loginFormState.userPhoneError?.let {
+                    userPhoneEditText.error = getString(it)
                 }
                 loginFormState.passwordError?.let {
                     passwordEditText.error = getString(it)
@@ -92,17 +117,17 @@ class LoginFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 loginViewModel.loginDataChanged(
-                    usernameEditText.text.toString(),
+                    userPhoneEditText.text.toString(),
                     passwordEditText.text.toString()
                 )
             }
         }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
+        userPhoneEditText.addTextChangedListener(afterTextChangedListener)
         passwordEditText.addTextChangedListener(afterTextChangedListener)
         passwordEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(
-                    usernameEditText.text.toString(),
+                    userPhoneEditText.text.toString(),
                     passwordEditText.text.toString()
                 )
             }
@@ -112,17 +137,36 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
             loginViewModel.login(
-                usernameEditText.text.toString(),
+                userPhoneEditText.text.toString(),
                 passwordEditText.text.toString()
             )
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome) + model.displayName
+    private fun updateUiWithUser(model: User) {
+        val welcome = getString(R.string.welcome) + " " + model.name
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        StoredAuthUser.setUser(requireContext(), model.id)
+        if (model.questionsList?.size!! < QuestionsContent.items(model.gender).size) {
+            StoredAuthUser.setUserInfoCompleted(requireContext(), false)
+        } else {
+            StoredAuthUser.setUserInfoCompleted(requireContext(), true)
+        }
+        goToNextScreen()
+    }
+
+    private fun goToNextScreen() {
+        this.findNavController()
+            .navigate(R.id.action_loginFragment_to_navigation_home,
+                null,
+                navOptions {
+                    anim {
+                        enter = android.R.anim.slide_in_left
+                        exit = android.R.anim.slide_out_right
+                    }
+                })
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

@@ -1,5 +1,8 @@
 package com.muslims.firebasemvvm.ui.login_registeration.data
 
+
+import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.services.UsersServices
 import com.muslims.firebasemvvm.ui.login_registeration.data.model.LoggedInUser
 import java.io.IOException
 
@@ -8,11 +11,11 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    suspend fun login(phone: String, password: String): Result<User> {
         try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)
+            val user = UsersServices.getUserByPhoneNumber(phone)
+            return Result.Success(user!!)
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
         }

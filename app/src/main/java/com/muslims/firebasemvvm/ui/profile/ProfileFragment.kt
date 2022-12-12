@@ -1,6 +1,9 @@
 package com.muslims.firebasemvvm.ui.profile
 
 import android.app.Dialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -54,6 +57,10 @@ class ProfileFragment : Fragment() {
             }
         } else {
             binding.noSignedInUserContainer?.visibility = View.VISIBLE
+        }
+
+        binding.editMyInfo?.setOnClickListener {
+            setClickToChat(it, "+201019867911", "السلام عليكم ورحمة الله \n أريد تعديل بياناتي ")
         }
 
         binding.termsOfUse.setOnClickListener { showTermServicesDialog() }
@@ -112,6 +119,19 @@ class ProfileFragment : Fragment() {
         )
 
         return root
+    }
+
+    fun setClickToChat(v: View, toNumber: String, message: String) {
+        val url = "https://wa.me/$toNumber/?text=" + message
+        try {
+            val pm = v.context.packageManager
+            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            v.context.startActivity(i)
+        } catch (e: PackageManager.NameNotFoundException) {
+            v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        }
     }
 
 
@@ -290,9 +310,6 @@ class ProfileFragment : Fragment() {
         lp.height = WindowManager.LayoutParams.MATCH_PARENT
         (dialog.findViewById<View>(R.id.bt_close) as ImageButton).setOnClickListener { dialog.dismiss() }
         (dialog.findViewById<View>(R.id.bt_accept) as Button).setOnClickListener {
-            dialog.dismiss()
-        }
-        (dialog.findViewById<View>(R.id.bt_decline) as Button).setOnClickListener {
             dialog.dismiss()
         }
         dialog.show()

@@ -1,5 +1,6 @@
 package com.muslims.firebasemvvm.ui.advices
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.muslims.firebasemvvm.databinding.FragmentAdvicesBinding
 import com.muslims.firebasemvvm.models.Advice
 import com.muslims.firebasemvvm.ui.users_applications_home.FireStoreStatus
 
+
 class AdvicesFragment : Fragment() {
 
     private lateinit var advicesViewModel: AdvicesViewModel
@@ -24,7 +26,7 @@ class AdvicesFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    lateinit var advicesAdapter: AdvicesRvAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,22 +39,23 @@ class AdvicesFragment : Fragment() {
         val root: View = binding.root
 
 
-        val advicesAdapter = AdvicesRvAdapter(listOf(), AdvicesRvAdapter.Listener { advice ->
+        advicesAdapter = AdvicesRvAdapter(listOf(), AdvicesRvAdapter.Listener { advice ->
             onAdviceItemClicked(advice)
         })
+
 
         binding.advicesRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = advicesAdapter
         }
 
-        advicesViewModel.advices.observe(viewLifecycleOwner , Observer {advicesList ->
+        advicesViewModel.advices.observe(viewLifecycleOwner, Observer { advicesList ->
             advicesAdapter.advicesList = advicesList
             advicesAdapter.notifyDataSetChanged()
         })
 
         advicesViewModel.status.observe(viewLifecycleOwner, Observer { status ->
-            when(status){
+            when (status) {
                 FireStoreStatus.LOADING -> {
                     binding.progressBar2.visibility = View.VISIBLE
                     binding.advicesRv.visibility = View.INVISIBLE
@@ -69,6 +72,7 @@ class AdvicesFragment : Fragment() {
 
         return root
     }
+
 
     private fun onAdviceItemClicked(advice: Advice) {
         var adviceBundle = bundleOf("advice" to advice)

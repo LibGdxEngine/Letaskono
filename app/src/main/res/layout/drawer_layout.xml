@@ -14,353 +14,299 @@
         android:id="@+id/included_home"/>
 
     <!--navigation drawer menu-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/filterDrawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:fitsSystemWindows="false">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grey_5"
-            android:orientation="vertical">
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/AppTheme.AppBarOverlay">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/white"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:gravity="center_vertical"
-                        android:text="Filter"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorPrimary" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <ImageButton
-                        android:id="@+id/btn_close_filter"
-                        android:layout_width="?attr/actionBarSize"
-                        android:layout_height="?attr/actionBarSize"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        app:srcCompat="@drawable/ic_close"
-                        app:tint="@color/colorPrimary" />
-
-                </LinearLayout>
-
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_large">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Keyword"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_80" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xmlarge"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:background="@android:color/white"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/transparent"
-                            android:paddingLeft="@dimen/spacing_middle"
-                            android:paddingRight="@dimen/spacing_middle"
-                            android:text="Lorem Ipsum" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_large" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Variant"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_80" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:background="@android:color/white"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/spacing_large"
-                            android:layout_marginRight="@dimen/spacing_large"
-                            android:text="Select variant" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <ImageView
-                            android:layout_width="@dimen/spacing_mxlarge"
-                            android:layout_height="@dimen/spacing_mxlarge"
-                            android:layout_margin="@dimen/spacing_middle"
-                            app:srcCompat="@drawable/ic_arrow_right"
-                            app:tint="@color/colorPrimary" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_large" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Location, city &amp; area"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_80" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:background="@android:color/white"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_large"
-                                android:layout_marginRight="@dimen/spacing_large"
-                                android:text="Select location" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-                            <ImageView
-                                android:layout_width="@dimen/spacing_mxlarge"
-                                android:layout_height="@dimen/spacing_mxlarge"
-                                android:layout_margin="@dimen/spacing_middle"
-                                app:srcCompat="@drawable/ic_arrow_right"
-                                app:tint="@color/colorPrimary" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_5" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_large"
-                                android:layout_marginRight="@dimen/spacing_large"
-                                android:text="Select city"
-                                android:textColor="@color/grey_20" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-                            <ImageView
-                                android:layout_width="@dimen/spacing_mxlarge"
-                                android:layout_height="@dimen/spacing_mxlarge"
-                                android:layout_margin="@dimen/spacing_middle"
-                                app:srcCompat="@drawable/ic_arrow_right"
-                                app:tint="@color/colorPrimary" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_5" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_large"
-                                android:layout_marginRight="@dimen/spacing_large"
-                                android:text="Select area"
-                                android:textColor="@color/grey_20" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-                            <ImageView
-                                android:layout_width="@dimen/spacing_mxlarge"
-                                android:layout_height="@dimen/spacing_mxlarge"
-                                android:layout_margin="@dimen/spacing_middle"
-                                app:srcCompat="@drawable/ic_arrow_right"
-                                app:tint="@color/colorPrimary" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_large" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Location, city &amp; area"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_80" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:background="@android:color/white"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_large"
-                                android:layout_marginRight="@dimen/spacing_large"
-                                android:text="Promo" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-
-                            <androidx.appcompat.widget.SwitchCompat
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/spacing_middle"
-                                android:checked="true"
-                                app:thumbTint="@color/switch_color_red" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/grey_5" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_large"
-                                android:layout_marginRight="@dimen/spacing_large"
-                                android:text="Agency" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-
-                            <androidx.appcompat.widget.SwitchCompat
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/spacing_middle"
-                                android:checked="false"
-                                app:thumbTint="@color/switch_color_red" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-
-            <com.balysv.materialripple.MaterialRippleLayout
-                android:id="@+id/btn_apply"
-                style="@style/RippleStyleWhite"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="APPLY"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                    android:textColor="@android:color/white"
-                    app:fontFamily="sans-serif-medium" />
-
-            </com.balysv.materialripple.MaterialRippleLayout>
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/filterDrawer"-->
+<!--        android:layout_width="240dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:fitsSystemWindows="false">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/grey_5"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <com.google.android.material.appbar.AppBarLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:theme="@style/AppTheme.AppBarOverlay">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:background="@android:color/white"-->
+<!--                    android:orientation="horizontal">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_marginLeft="@dimen/spacing_large"-->
+<!--                        android:layout_marginRight="@dimen/spacing_large"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:text="تصفية البحث"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"-->
+<!--                        android:textColor="@color/colorPrimary" />-->
+
+<!--                    <View-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="1" />-->
+
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/btn_close_filter"-->
+<!--                        android:layout_width="?attr/actionBarSize"-->
+<!--                        android:layout_height="?attr/actionBarSize"-->
+<!--                        android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                        app:srcCompat="@drawable/ic_close"-->
+<!--                        app:tint="@color/colorPrimary" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--            <androidx.core.widget.NestedScrollView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical"-->
+<!--                app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:padding="@dimen/spacing_large">-->
+
+<!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:text="البحث بالكود"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/grey_80" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="@dimen/spacing_xmlarge"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_marginTop="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:background="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:orientation="vertical">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:inputType="number"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:id="@+id/searchByCode"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:background="@color/transparent"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:paddingLeft="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:paddingRight="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:hint="اكتب الكود هنا" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    </LinearLayout>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <View&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="@dimen/spacing_large" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:text="البحث حسب الفئة العمرية"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/grey_80" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/searchByAge"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_marginTop="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:background="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:gravity="center_vertical"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:orientation="horizontal">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_marginLeft="@dimen/spacing_large"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_marginRight="@dimen/spacing_large"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:text="اختر العمر المناسب لك" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <View&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_weight="1" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="@dimen/spacing_mxlarge"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="@dimen/spacing_mxlarge"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_margin="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                            app:srcCompat="@drawable/ic_arrow_right"&ndash;&gt;-->
+<!--&lt;!&ndash;                            app:tint="@color/colorPrimary" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    </LinearLayout>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <View&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="@dimen/spacing_large" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:text="البحث حسب الحالة الاجتماعية"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/grey_80" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/searchByStatus"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_marginTop="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:background="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:orientation="vertical">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:gravity="center_vertical"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:orientation="horizontal">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_marginLeft="@dimen/spacing_large"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_marginRight="@dimen/spacing_large"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:text="اختر الحالات الاجتماعية" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <View&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_height="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_weight="1" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_width="@dimen/spacing_mxlarge"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_height="@dimen/spacing_mxlarge"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_margin="@dimen/spacing_middle"&ndash;&gt;-->
+<!--&lt;!&ndash;                                app:srcCompat="@drawable/ic_arrow_right"&ndash;&gt;-->
+<!--&lt;!&ndash;                                app:tint="@color/colorPrimary" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        </LinearLayout>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <View&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:layout_height="1dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                            android:background="@color/grey_5" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    </LinearLayout>&ndash;&gt;-->
+
+<!--                    <View-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="@dimen/spacing_large" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="البحث حسب النوع"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+<!--                        android:textColor="@color/grey_80" />-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/spacing_middle"-->
+<!--                        android:background="@android:color/white"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="@dimen/spacing_large"-->
+<!--                                android:layout_marginRight="@dimen/spacing_large"-->
+<!--                                android:text="عرض استمارات الرجال" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="0dp"-->
+<!--                                android:layout_weight="1" />-->
+
+
+<!--                            <androidx.appcompat.widget.SwitchCompat-->
+<!--                                android:id="@+id/manSwitch"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_margin="@dimen/spacing_middle"-->
+<!--                                android:checked="true"-->
+<!--                                app:thumbTint="@color/switch_color_red" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="1dp"-->
+<!--                            android:background="@color/grey_5" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:orientation="horizontal">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="@dimen/spacing_large"-->
+<!--                                android:layout_marginRight="@dimen/spacing_large"-->
+<!--                                android:text="عرض استمارات النساء" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="0dp"-->
+<!--                                android:layout_weight="1" />-->
+
+
+<!--                            <androidx.appcompat.widget.SwitchCompat-->
+<!--                                android:id="@+id/womanSwitch"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_margin="@dimen/spacing_middle"-->
+<!--                                android:checked="true"-->
+<!--                                app:thumbTint="@color/switch_color_red" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--            </androidx.core.widget.NestedScrollView>-->
+
+
+<!--            <com.balysv.materialripple.MaterialRippleLayout-->
+<!--                android:id="@+id/btn_apply"-->
+<!--                style="@style/RippleStyleWhite"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="@color/colorPrimary">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="تصفية"-->
+<!--                    android:textSize="25sp"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    app:fontFamily="sans-serif-medium" />-->
+
+<!--            </com.balysv.materialripple.MaterialRippleLayout>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

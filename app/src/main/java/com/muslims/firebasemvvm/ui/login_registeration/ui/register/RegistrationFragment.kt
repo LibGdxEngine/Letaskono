@@ -44,7 +44,7 @@ class RegistrationFragment : Fragment() {
             ViewModelProvider(this).get(RegistrationViewModel::class.java)
         _binding = RegisterationFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        userGeneratedId = Random(2000).nextInt(from = 0, until = 1000000).toString()
+        userGeneratedId  = (1..1000000).shuffled().first().toString()
         showTapTarget()
 
         val userName = binding.username
@@ -74,7 +74,6 @@ class RegistrationFragment : Fragment() {
                     binding.submitAccountBtn.visibility = View.INVISIBLE
                 }
                 NumberStatus.AVAILABLE -> {
-
                     binding.submitAccountBtn.visibility = View.VISIBLE
                     viewModel.signUp(
                         User(

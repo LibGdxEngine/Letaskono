@@ -3,15 +3,15 @@
 
     <item android:id="@+id/navigation_home"
         android:title="@string/applicants_fragment_title"
-        android:icon="@drawable/ic_subject"/>
+        android:icon="@drawable/ic_baseline_person_search_24"/>
 
     <item android:id="@+id/savedApplicationsFragment"
         android:title="@string/saved_applications_fragment_title"
-        android:icon="@drawable/ic_note"/>
+        android:icon="@drawable/ic_baseline_bookmark_added_24"/>
 
     <item android:id="@+id/navigation_advices"
-        android:title="نصائح"
-        android:icon="@drawable/ic_layers"/>
+        android:title="نصائح وإرشادات"
+        android:icon="@drawable/ic_baseline_explore_24"/>
 
     <item android:id="@+id/navigation_profile"
         android:title="@string/profile_fragment_title"

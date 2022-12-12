@@ -26,7 +26,6 @@ class UsersDetailsViewModel : ViewModel() {
                 _status.value = UpdatingStatus.DONE
             } catch (e: Exception) {
                 _status.value = UpdatingStatus.ERROR
-                println("HERE " + e.message.toString())
             }
         }
     }
@@ -40,7 +39,6 @@ class UsersDetailsViewModel : ViewModel() {
                 _removingStatus.value = UpdatingStatus.DONE
             } catch (e: Exception) {
                 _removingStatus.value = UpdatingStatus.ERROR
-                println("HERE " + e.message.toString())
             }
         }
     }

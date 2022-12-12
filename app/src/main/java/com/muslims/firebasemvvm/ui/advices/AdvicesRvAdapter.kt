@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.muslims.firebasemvvm.databinding.AdviceViewItemBinding
 import com.muslims.firebasemvvm.models.Advice
-import io.github.ponnamkarthik.richlinkpreview.ViewListener
 
 class AdvicesRvAdapter(var advicesList:List<Advice>, val listener:Listener): RecyclerView.Adapter<AdvicesRvAdapter.ViewHolder>() {
 

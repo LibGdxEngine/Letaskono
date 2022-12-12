@@ -16,8 +16,13 @@
     <style name="MyToolbarTheme" parent="MaterialBaseTheme.Light.DarkToolbar">
         <item name="android:textColorSecondary">@color/colorPrimary</item>
     </style>
+    <style name="animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
     <style name="AppTheme" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textColor">@color/mdtp_white</item>
         <item name="android:colorControlHighlight">@color/colorAccentLight</item>
         <item name="android:windowSharedElementsUseOverlay">false</item>
         <item name="android:windowContentTransitions">true</item>

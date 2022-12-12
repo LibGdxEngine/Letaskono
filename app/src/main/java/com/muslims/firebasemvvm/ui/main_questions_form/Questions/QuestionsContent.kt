@@ -230,6 +230,11 @@ object QuestionsContent {
             answers = listOf("منتقبة", "مختمرة", "طرح وفساتين", "طرح وبناطيل")
         ),
         QuestionDataModel.MCQ(
+            id = "26",
+            question = "هل لديك استعداد للنقاب؟",
+            answers = listOf("منتقبة بالفعل", "نعم أتمنى", "لا")
+        ),
+        QuestionDataModel.MCQ(
             id = "22",
             question = "الحالة الإجتماعية",
             answers = listOf("عزباء", "أرملة", "مطلقة")

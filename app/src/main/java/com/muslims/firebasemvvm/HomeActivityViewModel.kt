@@ -19,16 +19,21 @@ class HomeActivityViewModel : ViewModel() {
     val status: LiveData<AuthenticationStatus> = _status
 
 
-    fun getSignedInUser(phone:String) {
+    fun getSignedInUser(phone: String) {
         viewModelScope.launch {
-            _status.value = AuthenticationStatus.LOADING
-            val currentUser = UsersServices.getUserByPhoneNumber(phone)
-            if (currentUser != null) {
-                _user.value = currentUser
-                _status.value = AuthenticationStatus.DONE
-            } else {
+            try {
+                _status.value = AuthenticationStatus.LOADING
+                val currentUser = UsersServices.getUserByPhoneNumber(phone)
+                if (currentUser != null) {
+                    _user.value = currentUser
+                    _status.value = AuthenticationStatus.DONE
+                } else {
+                    _status.value = AuthenticationStatus.ERROR
+                }
+            } catch (error: Exception) {
                 _status.value = AuthenticationStatus.ERROR
             }
+
         }
     }
 }

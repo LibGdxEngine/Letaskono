@@ -1,20 +1,24 @@
 package com.muslims.firebasemvvm.ui.user_details
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
-import com.muslims.firebasemvvm.AuthenticationStatus
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.DetailsFragmentBinding
 import com.muslims.firebasemvvm.models.Question
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.utils.StoredAuthUser
+import com.muslims.firebasemvvm.utils.ProfileBuilder
+
 
 class UsersDetailsFragment : Fragment() {
 
@@ -39,10 +43,10 @@ class UsersDetailsFragment : Fragment() {
         val user = arguments?.getParcelable<User>("user")
         val signedInUser = arguments?.getParcelable<User>("signedInUser")
 
-        val favouritesList = user?.favourites?.split(",")
+        val favouritesList = signedInUser?.favourites?.split(",")
 
         if (favouritesList != null) {
-            if (favouritesList.contains(user.id)) {
+            if (favouritesList.contains(user?.id)) {
                 binding.favourite.setImageResource(R.drawable.ic_baseline_bookmark_added_24)
                 userAlreadyInFavourites = true
             } else {
@@ -106,14 +110,55 @@ class UsersDetailsFragment : Fragment() {
                         user?.id!!
                     )
                 }
+            }else{
+                Toast.makeText(requireContext(), "قم بتسجيل حسابك حتى تستطيع حفظ الإستمارة", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.share.setOnClickListener {
+            val profile = ProfileBuilder().build(user!!)
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(
+                    Intent.EXTRA_TEXT, profile.trimIndent()
+                )
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
+        binding.action.setOnClickListener {
+            if (signedInUser != null) {
+                var gender = if (signedInUser!!.gender == "man") "العريس" else "العروسة"
+                var otherGender = if (user!!.gender == "man") "العريس" else "العروسة"
+                var message = """
+                السلام عليكم ورحمة الله وبركاته 
+                أنا ${gender} رقم ${signedInUser.id}
+                أريد التواصل مع ${otherGender} رقم ${user.id}
+            """.trimIndent()
+                setClickToChat(it, "+201019867911", message)
+            } else {
+                Toast.makeText(requireContext(), "قم بتسجيل حسابك حتى تستطيع التواصل", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
         return root
+    }
+
+    fun setClickToChat(v: View, toNumber: String, message: String) {
+        val url = "https://wa.me/$toNumber/?text=" + message
+        try {
+            val pm = v.context.packageManager
+            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            v.context.startActivity(i)
+        } catch (e: PackageManager.NameNotFoundException) {
+            v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        }
     }
 
     private fun bindUserInfo(signedInUser: User?) {

@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">لِّتَسْكُنُوٓاْ</string>
 
-    <string name="applicants_fragment_title">الإستمارات</string>
+    <string name="applicants_fragment_title">استمارات الزواج</string>
     <string name="saved_applications_fragment_title">المحفوظات</string>
     <string name="display_applicant">عرض الإستمارة</string>
     <string name="advices_fragment_title">\"فمن اتبع هداي فلا يضل ولا يشقى\"</string>
 
 
-    <string name="drawer_item_home">Home</string>
-    <string name="drawer_item_free_play">Free Play</string>
-    <string name="drawer_item_custom">Custom</string>
-    <string name="drawer_item_section_header">Section Header</string>
-    <string name="drawer_item_settings">Settings</string>
-    <string name="drawer_item_help">Help</string>
-    <string name="drawer_item_open_source">Open Source</string>
-    <string name="drawer_item_contact">Contact</string>
+    <string name="drawer_item_home">أفراح لتسكنوا</string>
+    <string name="drawer_item_free_play">لماذا تريد أن تتزوج</string>
+    <string name="drawer_item_custom">من نحن وما هدفنا</string>
+    <string name="drawer_item_section_header">شاركنا الأجر والثواب</string>
+    <string name="drawer_item_settings">سهم الصالحين</string>
+    <string name="drawer_item_help">مشاركة التطبيق مع الأصدقاء</string>
+    <string name="drawer_item_open_source">تقييم التطبيق</string>
+    <string name="drawer_item_contact">الدعم والاقتراحات</string>
 
 
     <string name="lorem_ipsum">
@@ -22,11 +22,19 @@
         \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
     </string>
     <string name="very_long_lorem_ipsum_2">
-        Aliquam eu mauris lectus. Pellentesque lacinia ut urna ut gravida. Proin libero sem, auctor in posuere sit amet, porta a nibh. Vivamus maximus nunc eu urna pellentesque vulputate. Phasellus lacinia ut diam id mattis. Ut fermentum, sem non viverra maximus, elit massa varius dolor, ac elementum mi nunc eu orci. Fusce ornare mi sed dapibus tempus. Quisque sollicitudin condimentum ex vitae imperdiet. Mauris et est non nibh gravida suscipit eget id est.
-        \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis quis elit sed cursus. In commodo malesuada elit. Curabitur eget tortor ipsum. In consequat sollicitudin rhoncus. Donec interdum felis vitae ipsum mattis congue. Suspendisse eget tellus sit amet nunc egestas ultrices. Sed placerat eu arcu vel ullamcorper. Curabitur a dictum odio. Suspendisse fermentum ex vel ullamcorper scelerisque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam at nisl orci. Nullam ligula purus, pulvinar vel ligula sodales, tincidunt porttitor enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper tincidunt scelerisque. Praesent mollis magna ut consequat dictum.
-        \n\nDuis in vestibulum dui, non pulvinar tortor. Maecenas finibus nulla purus, ac consectetur erat finibus vitae. Ut eget convallis dolor. Mauris a leo nunc. Nullam facilisis tincidunt odio eget laoreet. Integer sapien ipsum, fringilla id purus et, cursus convallis dolor. Etiam vel lacinia nibh. Donec sollicitudin fermentum eleifend. Vivamus quis mauris in libero vehicula aliquet sit amet quis odio. Etiam et tincidunt turpis, vel iaculis urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam et mollis enim.
-        \n\nPraesent interdum lectus suscipit enim dictum, sed laoreet nisl posuere. Curabitur accumsan tellus ac iaculis fermentum. Curabitur a purus nec nibh porta imperdiet. Vivamus dignissim libero ut mauris rhoncus finibus non at urna. Phasellus a varius elit, a blandit est. Cras sodales tincidunt purus sit amet condimentum. Phasellus consectetur sem nec nisi congue, id gravida risus tristique. Curabitur vulputate convallis purus, vel bibendum nunc ultricies at.
-        \n\nInteger condimentum egestas eros mollis facilisis. Praesent vitae diam ac diam efficitur pretium nec vitae dui. Nunc quam est, porttitor ut dapibus non, sodales id nulla. Mauris facilisis malesuada dapibus. Aliquam erat volutpat. Vivamus vitae consequat mauris, nec dictum erat. Aliquam in consectetur est, sit amet varius risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent vulputate dapibus lorem, ut interdum lectus bibendum nec. Suspendisse potenti. Cras elementum cursus nisl, ac pulvinar eros fringilla vitae. Cras ac tortor sagittis diam feugiat tincidunt id at est. Curabitur consequat ante purus. Nunc malesuada scelerisque leo vel efficitur.
+        بسم الله الرحمن الرحيم والصلاة والسلام على أشرف المرسلين نبينا محمد وعلى أله وصحبه وسلم\n
+        فقد انتشر الحرام الخبيث وقل الحلال الطيب بين الناس فكان هذا التطبيق دعوة للعفة وللرجوع إلى ديننا الحنيف وشرعنا الكريم \n
+        وهذه بعض الشروط التي يجب أن يلتزم بها كل مسلم \n
+        1- الهدف من التطبيق هو تزويج شباب المسلمين وفتياتهم وليس العبث ويجب على الجميع البحث عن الزواج الشرعي فقط \n
+        2- يمنع منعا باتا التواصل مع الطرف الأخر قبل التواصل مع ولي الأمر أولا أو تعارف الأهل \n
+        3- التنسيق للتواصل مع ولي الأمر أو الأهل يكون عن طريق التطبيق ولا يسمح بالتواصل مباشرة مع أي طرف أخر \n
+        4- سيتم مراجعة استمارات المتقدمين من قبلنا ولنا الحق في رفض أي استمارة لا تتناسب مع معايير مجتمعنا الإسلامي \n
+        5- إذا صدر من أي طرف ما ينم عن سوء أدب فسيتم فصله من التطبيق دون سابق إنذار \n
+        6- كل من ليس مؤهلا شرعا للزواج سوف يتم استبعاده مؤقتا بعد إخباره بسبب الاستبعاد حتى يتوب ويقلع عن ذنبه فيجب على غير المحجبة أن تتحجب وعلى المقصر في صلاته أن يلتزم بها قبل أن يحاول التسجيل لدينا \n
+        7- نخلي مسؤوليتنا أمام الله عز وجل من أي شخص يكتب معلومات كاذبة عن نفسه أو يحاول خداع الطرف الأخر ومهمتنا فقط هي محاولة التوفيق بين المتدينين الراغبين في الزواج \n
+        8- وجود أشخاص على قائمة هذا التطبيق لا يعني بالضرورة أنهم مؤهلون للزواج ويجب على كل طرف أن يتأكد بنفسه من صلاح الطرف الأخر وأهليته للزواج \n
+        9- نبرأ إلى الله من كل شخص يريد أن يتزوج لدينا ليقوم بعمل أفراح مختلطة أو بتشغيل الموسيقى في أفراحه والتي لن تجلب له سوى محق البركة وسوء العاقبة \n
+        10- ننصح جميع المسجلين بإخلاص النية \n
     </string>
     <string name="short_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
 
@@ -48,7 +56,7 @@
     <string name="app_signature">🅛🅔🅣🅐🅢🅚🅞🅝🅞‌‌</string>
     <string name="male">رجل</string>
     <string name="female">امرأة</string>
-    <string name="welcome">السلام عليكم ورحمة الله وبركاته</string>
+    <string name="welcome">مرحبا بك يا </string>
     <string name="welcome_body">أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.أهلاً بك في تطبيق لتسكنوا. من فضلك قم بتسجيل الدخول لكتابة إستمارة أو عرض إستمارتك.</string>
     <string name="nationality_question">ما هي جنسيتك؟</string>
     <string name="choose_answer">---قم بالإختيار من هنا---</string>
@@ -73,9 +81,9 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="invalid_username">رقم الهاتف ليص صالحا</string>
+    <string name="invalid_password">كلمة السر غير صحيحة</string>
+    <string name="login_failed">تأكد من رقم الهاتف او كلمة السر</string>
     <string name="your_answer">اكتب هنا</string>
     <string name="large_text">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et cursus tortor. In facilisis dui ac quam vestibulum, eget fermentum risus tempor. In porttitor sem pulvinar lacus laoreet tempor. Ut vestibulum gravida scelerisque. Curabitur condimentum elit sit amet laoreet porta. Quisque sed fermentum lacus. Nunc tristique nisi id enim rutrum volutpat. Morbi eu facilisis mi. Vestibulum eu elit in augue placerat auctor. Aenean sodales lacus mauris, non suscipit massa auctor sit amet. Ut non dui tortor. Suspendisse egestas neque arcu, vitae porttitor est blandit id. Pellentesque porta malesuada dui, vitae imperdiet turpis feugiat non.
@@ -101,4 +109,5 @@ Nunc consectetur consectetur porttitor. Mauris semper lectus sed odio faucibus l
     </string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_why_marry">WhyMarryActivity</string>
 </resources>

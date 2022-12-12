@@ -53,6 +53,7 @@ object UsersServices {
         return user
     }
 
+
     suspend fun getUserById(userId: String): User? {
         val db = FirebaseFirestore.getInstance()
         var user: User? = null

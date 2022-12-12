@@ -83,7 +83,6 @@ class SavedApplicationsFragment : Fragment() {
                     usersRvAdapter.notifyDataSetChanged()
                 }
             }
-
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
@@ -96,10 +95,12 @@ class SavedApplicationsFragment : Fragment() {
                         .show()
                 }
                 FireStoreStatus.DONE -> {
-                    if (currentFavouriteUsersList == null) {
+                    if (currentFavouriteUsersList == null || currentFavouriteUsersList?.isEmpty()!!) {
                         binding.coordinatorLyt.visibility = View.VISIBLE
+                        binding.favouritesListContainer.visibility = View.GONE
                     }else{
                         binding.favouritesListContainer.visibility = View.VISIBLE
+                        binding.coordinatorLyt.visibility = View.GONE
                     }
                     binding.progressBar.visibility = View.GONE
                 }
