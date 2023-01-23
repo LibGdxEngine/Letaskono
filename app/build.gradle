@@ -12,8 +12,8 @@ android {
         applicationId "com.muslims.firebasemvvm"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 14
+        versionName "14.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -69,6 +69,9 @@ dependencies {
     //OK-HTTP
     implementation "io.grpc:grpc-okhttp:1.32.2"
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     //url viewer
     implementation 'io.github.ponnamkarthik:richlinkpreview:1.0.9'
     implementation 'org.jsoup:jsoup:1.11.2'
@@ -92,6 +95,13 @@ dependencies {
     implementation "androidx.startup:startup-runtime:1.0.0"
     //Tap target view
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
+    //In-App update
+    // This dependency is downloaded from the Google’s Maven repository.
+    // So, make sure you also include that repository in your project's build.gradle file.
+    implementation("com.google.android.play:app-update:2.0.1")
+
+    // For Kotlin users also import the Kotlin extensions library for Play In-App Update:
+    implementation("com.google.android.play:app-update-ktx:2.0.1")
 }
 // ADD THIS AT THE BOTTOM
 apply plugin: 'com.google.gms.google-services'

@@ -15,6 +15,9 @@
             app:destination="@id/UsersDetailsFragment"
             app:popUpTo="@id/UsersDetailsFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_home_to_adminFragment"
+            app:destination="@id/adminFragment" />
     </fragment>
 
     <fragment
@@ -119,4 +122,25 @@
             android:name="gender"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.muslims.firebasemvvm.ui.administration.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" >
+        <action
+            android:id="@+id/action_adminFragment_to_adminApplicationsListFragment"
+            app:destination="@id/adminApplicationsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminApplicationsListFragment"
+        android:name="com.muslims.firebasemvvm.ui.administration.applications_list_preview.AdminApplicationsListFragment"
+        android:label="AdminApplicationsListFragment" >
+        <action
+            android:id="@+id/action_adminApplicationsListFragment_to_adminApplicationsDetailsFragment"
+            app:destination="@id/adminApplicationsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminApplicationsDetailsFragment"
+        android:name="com.muslims.firebasemvvm.ui.administration.applications_details.AdminApplicationsDetailsFragment"
+        android:label="AdminApplicationsDetailsFragment" />
 </navigation>

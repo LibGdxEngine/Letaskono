@@ -89,133 +89,138 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/registerFormContainer"
-        android:layout_width="0dp"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:visibility="gone"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/whoAreYou">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/username1"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <LinearLayout
+            android:id="@+id/registerFormContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="الإسم الثلاثي بالعربي"
-            android:layoutDirection="rtl"
-            android:textDirection="rtl"
-            app:endIconCheckable="true"
-            app:endIconDrawable="@drawable/ic_person_grey"
-            app:endIconMode="custom"
-            app:endIconTint="@color/blue_grey_700"
-            app:errorEnabled="true"
-            app:helperText="اسمك لن يظهر لأحد بدون موافقتك">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:lines="1"
-                android:maxLines="1" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/custom_end_icon"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="رقم الهاتف"
-            android:layoutDirection="rtl"
-            android:textDirection="rtl"
-            app:endIconCheckable="true"
-            app:endIconDrawable="@android:drawable/sym_action_call"
-            app:endIconMode="custom"
-            app:endIconTint="@color/blue_grey_700"
-            app:errorEnabled="true"
-            app:helperText="رقم الهاتف لن يظهر لأحد بدون موافقتك">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLines="1" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="كلمة السر"
-            android:layoutDirection="rtl"
-            app:endIconMode="password_toggle"
-            app:endIconTint="@color/blue_grey_700"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:lines="1"
-
+                android:layout_marginBottom="12dp"
+                android:hint="الإسم الثلاثي بالعربي"
+                android:layoutDirection="rtl"
                 android:textDirection="rtl"
-                android:maxLines="1" />
+                app:endIconCheckable="true"
+                app:endIconDrawable="@drawable/ic_person_grey"
+                app:endIconMode="custom"
+                app:endIconTint="@color/blue_grey_700"
+                app:errorEnabled="true"
+                app:helperText="اسمك لن يظهر لأحد بدون موافقتك">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    android:maxLines="1" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginLeft="-16dp"
-            android:layout_marginRight="-16dp">
-
-            <ProgressBar
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/custom_end_icon"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/primary"
-                app:layout_constraintBottom_toBottomOf="@+id/submit_account_Btn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/submit_account_Btn" />
+                android:layout_marginBottom="12dp"
+                android:hint="رقم الهاتف"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl"
+                app:endIconCheckable="true"
+                app:endIconDrawable="@android:drawable/sym_action_call"
+                app:endIconMode="custom"
+                app:endIconTint="@color/blue_grey_700"
+                app:errorEnabled="true"
+                app:helperText="رقم الهاتف لن يظهر لأحد بدون موافقتك">
 
-            <Button
-                android:id="@+id/submit_account_Btn"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:hint="كلمة السر"
+                android:layoutDirection="rtl"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/blue_grey_700"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:lines="1"
+
+                    android:maxLines="1"
+                    android:textDirection="rtl" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="@drawable/btn_purple_a400"
-                android:text="تسجيل "
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginLeft="-16dp"
+                android:layout_marginRight="-16dp">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="@+id/submit_account_Btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/submit_account_Btn" />
+
+                <Button
+                    android:id="@+id/submit_account_Btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/btn_purple_a400"
+                    android:text="تسجيل "
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

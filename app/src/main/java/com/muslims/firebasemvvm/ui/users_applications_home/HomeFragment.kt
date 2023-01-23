@@ -1,6 +1,9 @@
 package com.muslims.firebasemvvm.ui.users_applications_home
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +16,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.muslims.firebasemvvm.R
 import com.muslims.firebasemvvm.databinding.FragmentHomeBinding
+import com.muslims.firebasemvvm.models.GENERAL_STATUS
 import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.models.UsersList
 import com.muslims.firebasemvvm.utils.AppRater
 import com.muslims.firebasemvvm.utils.StoredAuthUser
 
@@ -33,26 +41,24 @@ class HomeFragment : Fragment() {
     var selectedUsersList: MutableList<User> = mutableListOf()
     var allUsersList: MutableList<User> = mutableListOf()
 
-    private lateinit var observer: Observer<List<User>>
+    private lateinit var observer: Observer<UsersList>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        usersRvAdapter = UsersRvAdapter(listOf(), UsersRvAdapter.Listener { user ->
+        usersRvAdapter = UsersRvAdapter(mutableListOf(), UsersRvAdapter.Listener { user ->
             onUserRvItemClicked(user, signedInUser)
         })
     }
 
+    val MY_REQUEST_CODE = 123
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
 //        AppRater.app_launched(requireContext())
 
         binding.swipToRefreshLayout.setOnRefreshListener {
@@ -67,15 +73,26 @@ class HomeFragment : Fragment() {
 
         val currentUserId = StoredAuthUser.getUser(requireContext())
 
-        observer = Observer<List<User>> { usersList ->
-            if (!currentUserId.isNullOrEmpty()) {
-                signedInUser = usersList.first { it.id == currentUserId }
-                if (signedInUser!!.isBlocked) {
-                    Toast.makeText(requireContext(), "أنت محظور", Toast.LENGTH_SHORT).show()
-                    requireActivity().finishAndRemoveTask()
-                }
+        observer = Observer<UsersList> { usersListModel ->
+            var usersList = usersListModel.users;
 
-                allUsersList = usersList.toMutableList()
+            if (!currentUserId.isNullOrEmpty()) {
+                try {
+                    signedInUser = usersList!!.first { it.phone == currentUserId }
+                    if (signedInUser!!.isBlocked) {
+                        Toast.makeText(requireContext(), "أنت محظور", Toast.LENGTH_SHORT).show()
+                        requireActivity().finishAndRemoveTask()
+                    }
+                    allUsersList =
+                        usersList.filter { user ->
+                            user.generalStatus == GENERAL_STATUS.WANT_MARRY.toString()
+                                    && user.questionsList!!.isNotEmpty()
+                        }
+                            .toMutableList()
+                } catch (e: Exception) {
+                    Toast.makeText(context, "حصل خطأ... يرجي التواصل مع الدعم", Toast.LENGTH_SHORT)
+                        .show()
+                }
                 allUsersList.remove(signedInUser)
 
                 if (signedInUser?.gender == "man") {
@@ -100,14 +117,22 @@ class HomeFragment : Fragment() {
                         allUsersList.filter { user -> user.gender == "woman" }.toMutableList()
                 }
             } else {
-                selectedUsersList = usersList.toMutableList()
+                selectedUsersList = usersList!!.toMutableList()
+                selectedUsersList =
+                    selectedUsersList.filter { user -> user.questionsList != null }.toMutableList()
                 binding.chipWomen.isChecked = true
                 binding.chipMen.isChecked = true
                 binding.chipWomen.isEnabled = false
                 binding.chipMen.isEnabled = false
             }
+            selectedUsersList = selectedUsersList.filter { user ->
+                user.generalStatus == GENERAL_STATUS.WANT_MARRY.toString()
+                        && user.questionsList!!.isNotEmpty()
+            }.toMutableList()
             usersRvAdapter.users = selectedUsersList
             usersRvAdapter.notifyDataSetChanged()
+
+
         }
 
         binding.chipMen.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { chip, isChecked ->
@@ -135,6 +160,16 @@ class HomeFragment : Fragment() {
             usersRvAdapter.notifyDataSetChanged()
         })
 
+
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
+
         homeViewModel.users.observe(viewLifecycleOwner, observer)
 
         homeViewModel.status.observe(viewLifecycleOwner, Observer { status ->
@@ -150,10 +185,7 @@ class HomeFragment : Fragment() {
                 }
             }
         })
-
-        return root
     }
-
 
     private fun onUserRvItemClicked(clickedUser: User, signedInUser: User?) {
         var userBundle = bundleOf("user" to clickedUser, "signedInUser" to signedInUser)
@@ -169,7 +201,16 @@ class HomeFragment : Fragment() {
                     }
                 )
             }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                Log.e("MY_APP", "Update flow failed! Result code: $resultCode")
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
     }
 
     override fun onDestroyView() {

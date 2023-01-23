@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +52,11 @@ class LoginFragment : Fragment() {
         }
 
         binding.forgotPassword.setOnClickListener {
-            setClickToChat(it, "+201019867911", "السلام عليكم ورحمة الله \n أريد استعادة كلمة السر الخاصة بي")
+            setClickToChat(
+                it,
+                "+201019867911",
+                "السلام عليكم ورحمة الله \n أريد استعادة كلمة السر الخاصة بي"
+            )
         }
 
         return binding.root
@@ -95,15 +100,14 @@ class LoginFragment : Fragment() {
             })
 
         loginViewModel.loginResult.observe(viewLifecycleOwner,
-            Observer { loginResult ->
-                loginResult ?: return@Observer
-                loadingProgressBar.visibility = View.GONE
-                loginResult.error?.let {
-                    showLoginFailed(it)
+            Observer { user ->
+                if (user != null) {
+                    loadingProgressBar.visibility = View.GONE
+                    updateUiWithUser(user)
+                } else {
+                    showLoginFailed(404)
                 }
-                loginResult.success?.let {
-                    updateUiWithUser(it)
-                }
+
             })
 
         val afterTextChangedListener = object : TextWatcher {
@@ -148,8 +152,9 @@ class LoginFragment : Fragment() {
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
-        StoredAuthUser.setUser(requireContext(), model.id)
-        if (model.questionsList?.size!! < QuestionsContent.items(model.gender).size) {
+        StoredAuthUser.setUser(requireContext(), model.phone)
+
+        if (model.questionsList.isNullOrEmpty()) {
             StoredAuthUser.setUserInfoCompleted(requireContext(), false)
         } else {
             StoredAuthUser.setUserInfoCompleted(requireContext(), true)

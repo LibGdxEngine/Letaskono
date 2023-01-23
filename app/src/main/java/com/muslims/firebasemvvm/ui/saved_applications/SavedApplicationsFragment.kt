@@ -33,7 +33,7 @@ class SavedApplicationsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        usersRvAdapter = UsersRvAdapter(listOf(), UsersRvAdapter.Listener { user ->
+        usersRvAdapter = UsersRvAdapter(mutableListOf(), UsersRvAdapter.Listener { user ->
             onUserRvItemClicked(user, signedInUser)
         })
     }
@@ -74,12 +74,12 @@ class SavedApplicationsFragment : Fragment() {
 
         viewModel.users.observe(viewLifecycleOwner, Observer { usersList ->
             if (!currentUserId.isNullOrEmpty()) {
-                signedInUser = usersList.first { it.id == currentUserId }
+                signedInUser = usersList.first { it.phone == currentUserId }
                 val favouriteUsersIds = signedInUser?.favourites?.split(",")
                 if(favouriteUsersIds?.isNotEmpty()!!) {
                     currentFavouriteUsersList =
-                        usersList.filter { user -> favouriteUsersIds?.contains(user.id)!! }
-                    usersRvAdapter.users = currentFavouriteUsersList!!
+                        usersList.filter { user -> favouriteUsersIds?.contains(user.phone)!! }
+                    usersRvAdapter.users = currentFavouriteUsersList!!.toMutableList()
                     usersRvAdapter.notifyDataSetChanged()
                 }
             }

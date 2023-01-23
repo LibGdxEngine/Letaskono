@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">لِّتَسْكُنُوٓاْ</string>
+    <string name="app_name">لِتَسْكُنُوٓاْ</string>
+    <string name="admin_phone_number">+201094759435</string>
+    <string name="woman_admin_phone_number">+201090287732</string>
 
     <string name="applicants_fragment_title">استمارات الزواج</string>
     <string name="saved_applications_fragment_title">المحفوظات</string>
@@ -110,4 +112,6 @@ Nunc consectetur consectetur porttitor. Mauris semper lectus sed odio faucibus l
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_why_marry">WhyMarryActivity</string>
+    <string name="title_activity_admin">Admin</string>
+
 </resources>

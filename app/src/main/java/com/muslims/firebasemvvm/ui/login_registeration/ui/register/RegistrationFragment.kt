@@ -44,7 +44,9 @@ class RegistrationFragment : Fragment() {
             ViewModelProvider(this).get(RegistrationViewModel::class.java)
         _binding = RegisterationFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        userGeneratedId  = (1..1000000).shuffled().first().toString()
+
+        userGeneratedId = (1..1000000).shuffled().first().toString()
+
         showTapTarget()
 
         val userName = binding.username
@@ -52,19 +54,18 @@ class RegistrationFragment : Fragment() {
         phone = binding.phoneNumber
         val password = binding.password
 
-
         binding.submitAccountBtn.setOnClickListener {
             if (userNameIsValid(userName.text.toString().trim()) and phoneIsValid(
                     phone.text.toString().trim()
                 ) and passwordIsValid(password.text.toString().trim())
             ) {
                 viewModel.checkIfNumberIsAlreadySignedUp(phone.text.toString().trim())
-            } else if (!userNameIsValid(userName.text.toString())) {
-                userName.error = "اسم المستخدم غير صالح"
+            } else if (!userNameIsValid(userName.text.toString().trim())) {
+                userName.error = " اسم المستخدم غير صالح برجاء كتابة الإسم الثلاثي صحيحا"
             } else if (!phoneIsValid(phone.text.toString())) {
                 phone.error = "رقم الهاتف ليس صالحا"
             } else if (!passwordIsValid(password.text.toString())) {
-                password.error = "كلمة السر ليست صالحة"
+                password.error = "كلمة السر ليست صالحة يجب ان تكون أكثر من 6 احرف"
             }
         }
 
@@ -80,7 +81,8 @@ class RegistrationFragment : Fragment() {
                             id = userGeneratedId!!,
                             phone = phone.text.toString().trim(),
                             gender = selectedGender!!,
-                            password = password.text.toString().trim()
+                            password = password.text.toString().trim(),
+                            name = userName.text.toString().trim()
                         )
                     )
                 }
@@ -114,7 +116,7 @@ class RegistrationFragment : Fragment() {
                 }
                 RegistrationStatus.DONE -> {
                     binding.submitAccountBtn.visibility = View.VISIBLE
-                    StoredAuthUser.setUser(requireContext(), userGeneratedId)
+                    StoredAuthUser.setUser(requireContext(), phone.text.toString().trim())
                     goToNextScreen()
                 }
                 RegistrationStatus.ERROR -> {
@@ -158,15 +160,15 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun userNameIsValid(name: String): Boolean {
-        return name.isNotEmpty()
+        return name.isNotEmpty() && name.split(" ").size >= 3
     }
 
     private fun passwordIsValid(password: String): Boolean {
-        return password.isNotEmpty()
+        return password.isNotEmpty() && password.length >= 6
     }
 
     private fun phoneIsValid(phone: String): Boolean {
-        return phone.isNotEmpty()
+        return phone.isNotEmpty() && phone.length >= 7
     }
 
     private fun showTapTarget() {

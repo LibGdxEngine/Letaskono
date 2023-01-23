@@ -1,17 +1,19 @@
 package com.muslims.firebasemvvm.ui.welcome_to_app_stepper
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.muslims.firebasemvvm.R
@@ -34,13 +36,14 @@ class WelcomeToAppStepperFragment : Fragment() {
         "ابحث بدقة وتمهل في الاختيار",
         "اختر شريك حياتك بنفسك",
 
-    )
+        )
     private val about_description_array = arrayOf(
         "لتسكنوا هو أفضل تطبيق للزواج الإسلامي الذي يرضي الله عز وجل.",
         "يجب عليك ان تدخل جميع البيانات حتى نتأكد من تفعيل حسابك بشكل دائم.",
         "أخبرنا بالمزيد عنك وعن شخصيتك حتى نستطيع التوفيق بينك وبين شريك حياتك.",
         "يمكنك البحث عن اي مواصفات تريدها وحسب المكان الذي تريده.",
-        "اذا اعجبتك مواصفاته فلا تترد في التواصل معنا لنقوم بالتنسيق بينكما كما يجب.")
+        "اذا اعجبتك مواصفاته فلا تترد في التواصل معنا لنقوم بالتنسيق بينكما كما يجب."
+    )
 
     private val about_images_array = intArrayOf(
         R.drawable.logo,
@@ -56,7 +59,8 @@ class WelcomeToAppStepperFragment : Fragment() {
     ): View? {
         _binding = RegistrationFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        //TODO: add your code here
+
+
         initComponent()
         return root
     }
@@ -64,12 +68,46 @@ class WelcomeToAppStepperFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         stepperViewModel = ViewModelProvider(this).get(WelcomeToAppStepperViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        val sh = context!!.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+
+        // The value will be default as empty string because for
+        // the very first time when the app is opened, there is nothing to show
+
+        // The value will be default as empty string because for
+        // the very first time when the app is opened, there is nothing to show
+        val isFirstTime = sh.getBoolean("firstTime", true)
+        if (isFirstTime) {
+            // Creating an Editor object to edit(write to the file)
+
+            // Creating an Editor object to edit(write to the file)
+            val myEdit: SharedPreferences.Editor = sh.edit()
+
+            // Storing the key and its value as the data fetched from edittext
+
+            // Storing the key and its value as the data fetched from edittext
+            myEdit.putBoolean("firstTime", false)
+
+            // Once the changes have been made,
+            // we need to commit to apply those changes made,
+            // otherwise, it will throw an error
+
+            // Once the changes have been made,
+            // we need to commit to apply those changes made,
+            // otherwise, it will throw an error
+            myEdit.commit()
+            myEdit.apply()
+        }else{
+            val navController =
+                requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
+            navController.navigate(R.id.action_welcomeToAppStepperFragment_to_navigation_home)
+        }
     }
 
     private fun initComponent() {
         binding.btClose.setOnClickListener {
-            val navController = requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
+            val navController =
+                requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
             navController.navigate(R.id.action_welcomeToAppStepperFragment_to_navigation_home)
         }
         // adding bottom dots
@@ -84,7 +122,8 @@ class WelcomeToAppStepperFragment : Fragment() {
                 binding.viewPager.setCurrentItem(current)
             } else {
                 //happen when stepper finish
-                val navController = requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
+                val navController =
+                    requireActivity().findNavController(R.id.nav_host_fragment_activity_home)
                 navController.navigate(R.id.action_welcomeToAppStepperFragment_to_navigation_home)
             }
         })
@@ -139,12 +178,19 @@ class WelcomeToAppStepperFragment : Fragment() {
         private var layoutInflater: LayoutInflater? = null
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             layoutInflater = LayoutInflater.from(context) as LayoutInflater?
-            val view: View = layoutInflater!!.inflate(R.layout.item_stepper_registration, container, false)
+            val view: View =
+                layoutInflater!!.inflate(R.layout.item_stepper_registration, container, false)
             (view.findViewById<View>(R.id.title) as TextView).setText(about_title_array.get(position))
-            (view.findViewById<View>(R.id.description) as TextView).setText(about_description_array.get(
-                position))
-            (view.findViewById<View>(R.id.image) as ImageView).setImageResource(about_images_array.get(
-                position))
+            (view.findViewById<View>(R.id.description) as TextView).setText(
+                about_description_array.get(
+                    position
+                )
+            )
+            (view.findViewById<View>(R.id.image) as ImageView).setImageResource(
+                about_images_array.get(
+                    position
+                )
+            )
             container.addView(view)
             return view
         }

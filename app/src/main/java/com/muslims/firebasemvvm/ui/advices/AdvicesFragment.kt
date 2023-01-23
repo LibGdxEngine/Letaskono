@@ -50,7 +50,8 @@ class AdvicesFragment : Fragment() {
         }
 
         advicesViewModel.advices.observe(viewLifecycleOwner, Observer { advicesList ->
-            advicesAdapter.advicesList = advicesList
+
+            advicesAdapter.advicesList = advicesList.sortedBy { it.id }
             advicesAdapter.notifyDataSetChanged()
         })
 

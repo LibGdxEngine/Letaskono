@@ -1,5 +1,6 @@
 package com.muslims.firebasemvvm.ui.users_applications_home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,15 @@ import com.muslims.firebasemvvm.ui.users_applications_home.UsersRvAdapter.ViewHo
 import com.muslims.firebasemvvm.utils.ItemAnimation
 
 class UsersRvAdapter(
-    var users: List<User>,
+    var users: MutableList<User>,
     var listener: Listener,
     private val animationType: Int = 2
 ) : RecyclerView.Adapter<ViewHolder>() {
 
+    fun remove(user: User?){
+        users.remove(user)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = UserViewItemBinding
@@ -31,19 +36,21 @@ class UsersRvAdapter(
         val user = users.get(position)
         var name = ""
         var description = ""
-        val userAge = user?.questionsList?.first { it.id == "2" }
-        val userNationality = user?.questionsList?.first { it.id == "3" }
-        val userHeight = user?.questionsList?.first { it.id == "26" }
-        val userWeight = user?.questionsList?.first { it.id == "6" }
-        val userSkin = user?.questionsList?.first { it.id == "7" }
-        val userStateAndLocation = user?.questionsList?.first { it.id == "11" }
-        var userStatus: Question? = null
+
+        val userAge = user?.questionsList?.first { it.get("id") == "2" }
+
+        val userNationality = user?.questionsList?.first { it.get("id") == "3" }
+        val userHeight = user?.questionsList?.first { it.get("id")== "26" }
+        val userWeight = user?.questionsList?.first { it.get("id")== "6" }
+        val userSkin = user?.questionsList?.first { it.get("id")== "7" }
+        val userStateAndLocation = user?.questionsList?.first { it.get("id")== "11" }
+        var userStatus: Map<String, String>? = null
 
         when (user.gender) {
             "man" -> {
-                userStatus = user?.questionsList?.first { it.id == "19" }
+                userStatus = user?.questionsList?.first { it.get("id") == "19" }
                 name += "عريس "
-                if (user.questionsList?.first { it.id == "23" }?.answer == "نعم") {
+                if (user.questionsList?.first { it.get("id")== "23" }?.get("answer") == "نعم") {
                     name += " ملتحي"
                     holder.binding.image.setImageResource(R.drawable.man_with_lehya)
                 } else {
@@ -52,9 +59,9 @@ class UsersRvAdapter(
 
             }
             "woman" -> {
-                userStatus = user?.questionsList?.first { it.id == "22" }
+                userStatus = user?.questionsList?.first { it.get("id")== "22" }
                 name += "عروسة "
-                when (user.questionsList?.first { it.id == "24" }?.answer) {
+                when (user.questionsList?.first { it.get("id")== "24" }?.get("answer")) {
                     "منتقبة" -> {
                         name += " منتقبة "
                         holder.binding.image.setImageResource(R.drawable.women_with_neqab)
@@ -70,10 +77,10 @@ class UsersRvAdapter(
             }
         }
         holder.binding.name.text = name + " - " + " كود " + "${user.id}"
-        holder.binding.description.text = "السن: " + "${userAge?.answer}" +
-                " - " + "${userNationality?.answer}" +
-                " - " + "${userStatus?.answer}" +
-                " - " + "${userStateAndLocation?.answer}" +
+        holder.binding.description.text = "السن: " + "${userAge?.get("answer")}" +
+                " - " + "${userNationality?.get("answer")}" +
+                " - " + "${userStatus?.get("answer")}" +
+                " - " + "${userStateAndLocation?.get("answer")}" +
                 " "
 
         holder.itemView.setOnClickListener {
@@ -117,6 +124,4 @@ class UsersRvAdapter(
             lastPosition = position
         }
     }
-
-
 }

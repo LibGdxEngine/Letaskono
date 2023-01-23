@@ -70,7 +70,6 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
         questionsList = QuestionsContent.items(selectedGender)
 
 
-
         recyclerView = binding.list
 
         _binding!!.textViewLogo.setCharacterDelay(150)
@@ -104,16 +103,17 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
             when (status) {
                 AuthenticationStatus.LOADING -> {
                     if (mToast != null) mToast?.cancel();
-                    mToast = Toast.makeText(context, "LOADING", Toast.LENGTH_LONG);
+                    mToast = Toast.makeText(context, "جاري التحميل...", Toast.LENGTH_LONG);
                     mToast?.show();
                 }
                 AuthenticationStatus.DONE -> {
-                    val questions = mutableListOf<Question>()
+                    val questions = mutableListOf<Map<String, String>>()
+
                     for (item in questionsList!!) {
                         var id: String? = null
                         var question: String? = null
                         var answer: String? = null
-                        var note: String? = null
+                        var note: String? = ""
                         if (item is QuestionDataModel.MCQ) {
                             id = item.id
                             question = item.question
@@ -129,10 +129,17 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                             answer = item.answer
                             note = item.note
                         }
-                        questions.add(Question(id!!, question!!, answer!!, note))
+                        questions?.add(
+                            mapOf(
+                                "id" to id!!,
+                                "question" to question!!,
+                                "answer" to answer!!,
+                                "note" to note!!
+                            )
+                        )
                     }
                     currentUser?.questionsList = questions
-                    viewModel.updateUser(currentUser!!)
+                    viewModel.updateUser(currentUser!!.phone, currentUser!!)
                 }
                 AuthenticationStatus.ERROR -> {
                     if (mToast != null) mToast?.cancel();
@@ -156,7 +163,8 @@ class QuestionsFragment : Fragment(), QuestionsRvAdapter.Listener {
                 }
                 UpdatingStatus.ERROR -> {
                     if (mToast != null) mToast?.cancel();
-                    mToast = Toast.makeText(context, "حصل خطأ ما...تواصل معنا لحله!", Toast.LENGTH_LONG);
+                    mToast =
+                        Toast.makeText(context, "حصل خطأ ما...تواصل معنا لحله!", Toast.LENGTH_LONG);
                     mToast?.show();
                 }
             }

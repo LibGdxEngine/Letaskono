@@ -47,13 +47,14 @@ object QuestionsContent {
             id = "3",
             question = "ما هي جنسيتك؟",
         ),
+
         QuestionDataModel.TextInput(
             id = "4",
             question = "تكلم عن نفسك (أو ما يقوله الناس عنك)",
         ),
         QuestionDataModel.TextInput(
             id = "5",
-            question = "ما هي المواصفات التي تريدها في شريكـة حياتك؟",
+            question = "ما هي المواصفات التي تريدها في زوجتك ؟",
         ),
         QuestionDataModel.NumericInput(
             id = "26",
@@ -84,6 +85,10 @@ object QuestionsContent {
             question = "إلى أي محافظة تنتمي في الأصل؟ وأين تعيش حاليا؟",
         ),
         QuestionDataModel.TextInput(
+            id = "26",
+            question = "اذكر اسم المركز داخل المحافظة",
+        ),
+        QuestionDataModel.TextInput(
             id = "12",
             question = "ما هو عمل الوالد؟",
         ),
@@ -91,23 +96,23 @@ object QuestionsContent {
             id = "13",
             question = "ما هو عمل الوالدة؟",
         ),
-        QuestionDataModel.TextInput(
-            id = "14",
-            question = "ما عدد الإخوة والأخوات وأعمارهم ومؤهلاتهم؟",
-        ),
-        QuestionDataModel.TextInput(
-            id = "15",
-            question = "ما مقدار حفظك للقران؟",
-        ),
-        QuestionDataModel.MCQ(
-            id = "16",
-            question = "هل تشاهد الأفلام او تستمع إلى الموسيقى أو الأغاني ؟",
-            answers = listOf("لا", "نعم كثيرا", "نادرا")
-        ),
-        QuestionDataModel.TextInput(
-            id = "17",
-            question = "هل لديك أي انتمائات دينية؟",
-        ),
+//        QuestionDataModel.TextInput(
+//            id = "14",
+//            question = "ما عدد الإخوة والأخوات وأعمارهم ومؤهلاتهم؟",
+//        ),
+//        QuestionDataModel.TextInput(
+//            id = "15",
+//            question = "ما مقدار حفظك للقران؟",
+//        ),
+//        QuestionDataModel.MCQ(
+//            id = "16",
+//            question = "هل تشاهد الأفلام او تستمع إلى الموسيقى أو الأغاني ؟",
+//            answers = listOf("لا", "نعم كثيرا", "نادرا")
+//        ),
+//        QuestionDataModel.TextInput(
+//            id = "17",
+//            question = "هل لديك أي انتمائات دينية؟",
+//        ),
         QuestionDataModel.TextInput(
             id = "18",
             question = "من مرسل الاستمارة ،أنت أم أحد معارفك؟",
@@ -121,10 +126,10 @@ object QuestionsContent {
             question = "هل أنت ملتحي؟",
             answers = listOf("نعم", "لحية خفيفة", "لا")
         ),
-        QuestionDataModel.TextInput(
-            id = "20",
-            question = "هل أنت رياضي؟",
-        ),
+//        QuestionDataModel.TextInput(
+//            id = "20",
+//            question = "هل أنت رياضي؟",
+//        ),
         QuestionDataModel.TextInput(
             id = "21",
             question = "هل أنت مدخن؟",
@@ -161,7 +166,7 @@ object QuestionsContent {
         ),
         QuestionDataModel.TextInput(
             id = "5",
-            question = "ما هي المواصفات التي تريدينها في شريك حياتك؟",
+            question = "ما هي المواصفات التي تريدينها في زوجك؟",
         ),
         QuestionDataModel.NumericInput(
             id = "26",
@@ -192,6 +197,10 @@ object QuestionsContent {
             question = "إلى أي محافظة تنتمين في الأصل؟ وأين تعيشين حاليا؟",
         ),
         QuestionDataModel.TextInput(
+            id = "26",
+            question = "اذكري اسم المركز داخل المحافظة",
+        ),
+        QuestionDataModel.TextInput(
             id = "12",
             question = "ما هو عمل الوالد؟",
         ),
@@ -199,23 +208,23 @@ object QuestionsContent {
             id = "13",
             question = "ما هو عمل الوالدة؟",
         ),
-        QuestionDataModel.TextInput(
-            id = "14",
-            question = "ما عدد الإخوة والأخوات وأعمارهم ومؤهلاتهم؟",
-        ),
-        QuestionDataModel.TextInput(
-            id = "15",
-            question = "ما مقدار حفظك للقران؟",
-        ),
-        QuestionDataModel.MCQ(
-            id = "16",
-            question = "هل تشاهدين الأفلام او تستمعين إلى الموسيقى أو الأغاني ؟",
-            answers = listOf("لا", "نعم كثيرا", "نادرا")
-        ),
-        QuestionDataModel.TextInput(
-            id = "17",
-            question = "هل لديك أي انتمائات دينية؟",
-        ),
+//        QuestionDataModel.TextInput(
+//            id = "14",
+//            question = "ما عدد الإخوة والأخوات وأعمارهم ومؤهلاتهم؟",
+//        ),
+//        QuestionDataModel.TextInput(
+//            id = "15",
+//            question = "ما مقدار حفظك للقران؟",
+//        ),
+//        QuestionDataModel.MCQ(
+//            id = "16",
+//            question = "هل تشاهدين الأفلام او تستمعين إلى الموسيقى أو الأغاني ؟",
+//            answers = listOf("لا", "نعم كثيرا", "نادرا")
+//        ),
+//        QuestionDataModel.TextInput(
+//            id = "17",
+//            question = "هل لديك أي انتمائات دينية؟",
+//        ),
         QuestionDataModel.TextInput(
             id = "18",
             question = "من مرسل الاستمارة ،أنت أم أحد معارفك؟",
@@ -238,6 +247,14 @@ object QuestionsContent {
             id = "22",
             question = "الحالة الإجتماعية",
             answers = listOf("عزباء", "أرملة", "مطلقة")
+        ),
+        QuestionDataModel.TextInput(
+            id = "26",
+            question = "اذا كانت لديك اي مشكلة مع ولي أمرك بخصوص مسألة الزواج فيرجى شرح المشكلة لنا حتى نساعدك في حلها"
+        ),
+        QuestionDataModel.NumericInput(
+            id = "6",
+            question = "يرجى ادخال رقم هاتف ولي الأمر مع العلم اننا لن نتواصل معه الا بعد الرجوع اليك",
         ),
     )
 

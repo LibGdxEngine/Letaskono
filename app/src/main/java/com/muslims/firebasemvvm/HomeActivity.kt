@@ -32,7 +32,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.muslims.firebasemvvm.databinding.DrawerLayoutBinding
 import com.muslims.firebasemvvm.models.User
-import com.muslims.firebasemvvm.ui.why_marry.WhyMarryActivity
 import com.muslims.firebasemvvm.utils.DrawerLocker
 import com.muslims.firebasemvvm.utils.StoredAuthUser
 
@@ -147,10 +146,12 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
                     .withIcon(R.drawable.share_icon).withEnabled(true),
                 SecondaryDrawerItem().withSelectable(false)
                     .withName(R.string.drawer_item_open_source).withIcon(
-                    R.drawable.start
-                ),
+                        R.drawable.start
+                    ),
                 SecondaryDrawerItem().withSelectable(false).withName(R.string.drawer_item_contact)
-                    .withIcon(R.drawable.social)
+                    .withIcon(R.drawable.social),
+                SecondaryDrawerItem().withSelectable(false).withName("الادارة")
+                    .withIcon(R.drawable.ic_baseline_admin_panel_settings_24)
             )
             .withStickyHeader(layoutInflater.inflate(R.layout.header, null))
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
@@ -170,7 +171,14 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
                             mToast?.show()
                         }
                         1 -> {
-                            startActivity(Intent(this@HomeActivity, WhyMarryActivity::class.java))
+                            if (mToast != null) mToast?.cancel()
+                            mToast = Toast.makeText(
+                                applicationContext,
+                                "قريبا إن شاء الله",
+                                Toast.LENGTH_LONG
+                            )
+                            mToast?.show()
+//                            startActivity(Intent(this@HomeActivity, WhyMarryActivity::class.java))
                         }
                         2 -> {
                             if (mToast != null) mToast?.cancel()
@@ -204,7 +212,7 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
                             sendIntent.action = Intent.ACTION_SEND
                             sendIntent.putExtra(
                                 Intent.EXTRA_TEXT,
-                                " حمل هذا التطبيق للزواج الشرعي الإسلامي "+ " \n " + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+                                " حمل هذا التطبيق للزواج الشرعي الإسلامي " + " \n " + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
                             )
                             sendIntent.type = "text/plain"
                             startActivity(sendIntent)
@@ -229,7 +237,28 @@ class HomeActivity : AppCompatActivity(), DrawerLocker {
                             return false
                         }
                         7 -> {
-                            setClickToChat(binding.root, "+201019867911", "السلام عليكم ورحمة الله \n ")
+                            setClickToChat(
+                                binding.root,
+                                getString(R.string.admin_phone_number),
+                                "السلام عليكم ورحمة الله \n "
+                            )
+                            return false
+                        }
+                        8 -> {
+                            try {
+                                val navController =
+                                    findNavController(R.id.nav_host_fragment_activity_home)
+                                navController.navigate(R.id.action_navigation_home_to_adminFragment)
+                            } catch (exception: Exception) {
+                                if (mToast != null) mToast?.cancel()
+                                mToast = Toast.makeText(
+                                    applicationContext,
+                                    "أنت متواجد في صفحة الادارة بالفعل",
+                                    Toast.LENGTH_LONG
+                                )
+                                mToast?.show()
+                            }
+//                            startActivity(Intent(this@HomeActivity, AdminActivity::class.java))
                             return false
                         }
                     }

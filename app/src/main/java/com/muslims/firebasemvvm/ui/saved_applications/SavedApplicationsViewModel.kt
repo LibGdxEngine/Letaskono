@@ -6,9 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.muslims.firebasemvvm.models.User
+import com.muslims.firebasemvvm.models.UsersList
+import com.muslims.firebasemvvm.services.UsersApiService
 import com.muslims.firebasemvvm.services.UsersServices
 import com.muslims.firebasemvvm.ui.users_applications_home.FireStoreStatus
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SavedApplicationsViewModel : ViewModel() {
     private val _users = MutableLiveData<List<User>>()
@@ -24,10 +29,22 @@ class SavedApplicationsViewModel : ViewModel() {
     }
 
     fun getAllUsers() {
-        viewModelScope.launch {
-            _status.value = FireStoreStatus.LOADING
-            _users.value = UsersServices.getAllUsers()
-            _status.value = FireStoreStatus.DONE
-        }
+        _status.value = FireStoreStatus.LOADING
+        UsersApiService.api.getAllUsers().enqueue(object : Callback<UsersList> {
+            override fun onResponse(call: Call<UsersList>, response: Response<UsersList>) {
+                if (response.body() != null) {
+                    _users.value = response.body()!!.users
+                    _status.value = FireStoreStatus.DONE
+                } else {
+
+                    _status.value = FireStoreStatus.ERROR
+                    return
+                }
+            }
+
+            override fun onFailure(call: Call<UsersList>, t: Throwable) {
+                _status.value = FireStoreStatus.ERROR
+            }
+        })
     }
 }

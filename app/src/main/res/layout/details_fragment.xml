@@ -164,16 +164,18 @@
             app:layout_anchor="@id/app_bar"
             app:fabSize="mini"
             app:layout_anchorGravity="top|end" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/fab_margin"
             android:layout_marginTop="@dimen/fab_margin"
-            android:src="@drawable/ic_share"
             android:backgroundTint="@color/primary"
-            app:layout_anchor="@id/app_bar"
+            android:src="@drawable/ic_share"
+            android:visibility="gone"
             app:fabSize="mini"
+            app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="top|start" />
 
 
@@ -192,6 +194,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/report"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/ic_baseline_report_24"
+        android:text="تبليغ عن الاستمارة"
+        android:textSize="14sp"
+        app:cornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -220,7 +220,8 @@
                     android:layout_marginRight="8dp"
                     android:text="15"
                     android:textDirection="rtl"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/le7ya"
@@ -251,6 +252,7 @@
                     android:text="16"
                     android:textDirection="rtl"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -268,7 +270,8 @@
                     android:layout_marginRight="8dp"
                     android:text="17"
                     android:textDirection="rtl"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -381,7 +384,8 @@
                     android:layout_marginRight="8dp"
                     android:text="14"
                     android:textDirection="rtl"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -464,6 +468,7 @@
                     android:text="20"
                     android:textDirection="rtl"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
